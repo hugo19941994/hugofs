@@ -1,0 +1,118 @@
+@font-face {
+  font-family: "Raleway";
+  src:  url(/assets/Raleway-Light.woff2) format("woff2"),
+        url(/assets/Raleway-Light.ttf) format("truetype");
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: 'Raleway', sans-serif;
+}
+
+#universal {
+  text-align: center;
+  font-weight: bold;
+  padding: 15px 0;
+}
+
+nav {
+  min-height: 40px;
+}
+
+nav a {
+  font-weight: bold;
+  text-decoration: none;
+  color: #fff;
+  padding: 20px;
+  display: inline-block;
+  line-height: 3px;
+}
+
+nav a:hover {}
+
+.hero-universal {
+  flex: 3 0 0;
+  min-height: 500px;
+  display: block;
+  padding: 20px;
+}
+
+.router-link-active {
+  background-color: rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+}
+
+main {
+  padding: 20px;
+}
+
+pre {
+  font-size: 12px;
+}
+
+.page {
+  background: #303030;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.sidebar {
+  max-width: 400px;
+  padding: 20px;
+  flex:  2 0 0;
+}
+
+.hugo-image {
+  padding-top: 10px;
+  max-height: 100%;
+  height: 250px;
+  width: auto;
+  position: relative;
+  overflow: hidden;
+  margin: 10px;
+  text-align: center;
+}
+
+.hugo-image img {
+  display: inline;
+  max-height: 100%;
+  width: auto;
+  max-width: 100%;
+  border-radius: 50%;
+}
+
+.name {
+  color: #fff;
+  text-align: center;
+}
+
+.logos {
+  padding: 10px
+}
+
+.logos img {
+  width: 30px;
+}
+
+.intro {
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+  transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: box-shadow;
+  background: #424242;
+}
+
+@media all and (max-width: 500px) {
+  .sidebar {
+    max-width: 500px;
+  }
+
+  .container {
+    /* On small screens, we are no longer using row direction but column */
+    flex-direction: column;
+  }
+}

@@ -20,11 +20,13 @@ export const platformRef = platformUniversalDynamic();
 export function main() {
   // Load fonts async
   // https://github.com/typekit/webfontloader#configuration
+  /*
   loadWebFont({
     google: {
       families: ['Droid Sans']
     }
   });
+  */
 
   return platformRef.bootstrapModule(MainModule);
 }

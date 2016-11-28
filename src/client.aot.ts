@@ -22,11 +22,13 @@ export const platformRef = platformBrowser();
 export function main() {
   // Load fonts async
   // https://github.com/typekit/webfontloader#configuration
+  /*
   loadWebFont({
     google: {
       families: ['Droid Sans']
     }
   });
+  */
 
   return platformRef.bootstrapModuleFactory(MainModuleNgFactory);
 }
