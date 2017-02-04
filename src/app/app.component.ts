@@ -1,4 +1,5 @@
 import { Component, Directive, ElementRef, Renderer, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
+import { ViewService } from './shared/view.service';
 
 //
 /////////////////////////
@@ -26,4 +27,5 @@ export class XLargeDirective {
   templateUrl: './app.component.html'
 })
 export class AppComponent {
+  constructor(public viewService : ViewService){}
 }

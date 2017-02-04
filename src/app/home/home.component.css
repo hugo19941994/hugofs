@@ -1,0 +1,27 @@
+.home {
+  border-radius: 2px;
+  padding: 24px;
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+  transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: box-shadow;
+  background: #e84c3d;
+}
+
+.home a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.home h1 {
+  margin-top: 0px;
+}
+
+blockquote {
+  border-left:5px #158126 solid;
+  background:#fff;
+  padding:20px 20px 20px 40px;
+}
+
+blockquote::before {
+  left: 1em;
+}

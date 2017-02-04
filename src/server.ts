@@ -64,9 +64,10 @@ app.use(cacheControl, express.static(path.join(ROOT, 'dist/client'), {index: fal
 /////////////////////////
 // ** Example API
 // Notice API should be in aseparate process
-import { postsApi } from './backend/api';
+import { postsApi, photosApi } from './backend/api';
 // Our API for demos only
 app.use('/api', postsApi());
+app.use('/photosApi', photosApi());
 
 function ngApp(req, res) {
   res.render('index', {

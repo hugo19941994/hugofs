@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ApiService } from './api.service';
 import { ModelService } from './model/model.service';
+import { ViewService } from './view.service';
 
 const MODULES = [
   // Do NOT include UniversalModule, HttpModule, or JsonpModule here
@@ -23,7 +24,8 @@ const COMPONENTS = [
 
 const PROVIDERS = [
   ModelService,
-  ApiService
+  ApiService,
+  ViewService
 ]
 
 @NgModule({

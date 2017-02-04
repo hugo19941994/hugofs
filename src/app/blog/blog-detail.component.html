@@ -1,0 +1,12 @@
+<div class="post">
+  <div class="title">
+    {{data.title}}
+  </div>
+  <div class="date">
+    {{data.date}}
+  </div>
+  <div class="post-wrap">
+    <div [innerHTML]="data.text" class="post-body"></div>
+    <a href="javascript:undefined" (click)="back()">Back</a>
+  </div>
+</div>

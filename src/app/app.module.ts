@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { HomeModule } from './+home/home.module';
+import { HomeModule } from './home/home.module';
 import { ProjectsModule } from './projects/projects.module';
 import { BlogModule } from './blog/blog.module';
+import { PhotosModule } from './photos/photos.module';
 
 import { SharedModule } from './shared/shared.module';
 
@@ -18,6 +19,7 @@ import { AppComponent, XLargeDirective } from './app.component';
     HomeModule,
     ProjectsModule,
     BlogModule,
+    PhotosModule,
     AppRoutingModule
   ]
 })

@@ -2,6 +2,7 @@ import { Component, Inject, ChangeDetectionStrategy, ViewEncapsulation } from '@
 import { Http, Response } from '@angular/http';
 import { BlogDetailComponent } from './blog-detail.component';
 import { Router, Resolve, ActivatedRouteSnapshot } from '@angular/router';
+import { ViewService } from '../shared/view.service';
 
 @Component({
   selector: 'blog',
@@ -9,21 +10,10 @@ import { Router, Resolve, ActivatedRouteSnapshot } from '@angular/router';
   templateUrl: './blog.component.html'
 })
 export class BlogComponent {
-  posts = {}
-  showList = true;
+  posts = []
 
-  constructor(private http: Http, private router: Router) {
+  constructor(private http: Http, private router: Router, public viewService: ViewService) {
     // Show list if the user is coming back to /blog
-    router.events.subscribe((val) => {
-      if (val.url == '/blog') {
-        this.showList = true;
-      }
-      else {
-        this.showList = false;
-      }
-    });
-
-    this.showList = true;
     let res = {}
     this.http.get('/api/posts')
       .map((res: Response) => res.json())
@@ -33,7 +23,7 @@ export class BlogComponent {
   }
 
   selectPost(id) {
-    this.showList = false;
-    this.router.navigate(['/blog/'+ id])
+    this.viewService.view = false;
+    this.router.navigate(['/blog/'+ id.title])
   }
 }

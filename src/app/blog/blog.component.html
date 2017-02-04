@@ -1,0 +1,8 @@
+<router-outlet></router-outlet>
+<div *ngIf="viewService.view">
+  <div *ngFor="let post of posts" (click)="selectPost(post)">
+    <a href='javascript:undefined' class="post-title">
+      {{post.title}} | {{post.date}}
+    </a>
+  </div>
+</div>

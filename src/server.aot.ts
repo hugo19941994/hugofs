@@ -12,7 +12,14 @@ import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as cookieParser from 'cookie-parser';
 import * as morgan from 'morgan';
-import * as compression from 'compression';
+import * as mcache from 'memory-cache';
+
+const spdy = require('spdy')
+const compressible = require('compressible')
+const { gzipSync } = require('zlib');
+const accepts = require('accepts');
+const { compressSync } = require('iltorb');
+const interceptor = require('express-interceptor');
 
 // Angular 2
 import { enableProdMode } from '@angular/core';
@@ -49,7 +56,38 @@ app.set('json spaces', 2);
 
 app.use(cookieParser('Angular 2 Universal'));
 app.use(bodyParser.json());
-app.use(compression());
+
+app.use(interceptor((req, res)=>({
+  // don't compress responses with this request header
+  isInterceptable: () => (compressible(res.get('Content-Type')) && !req.headers['x-no-compression']),
+  intercept: ( body, send ) => {
+    const encodings  = new Set(accepts(req).encodings());
+    const bodyBuffer = new Buffer(body);
+    // url specific key for response cache
+    const key = '__response__' + req.originalUrl || req.url;
+    let output = bodyBuffer;
+    // check if cache exists
+    if (mcache.get(key) === null) {
+      // check for encoding support
+      if (encodings.has('br')) {
+        // brotli
+        res.setHeader('Content-Encoding', 'br');
+        output = compressSync(bodyBuffer);
+        mcache.put(key, {output, encoding: 'br'});
+      } else if (encodings.has('gzip')) {
+        // gzip
+        res.setHeader('Content-Encoding', 'gzip');
+        output = gzipSync(bodyBuffer);
+        mcache.put(key, {output, encoding: 'gzip'});
+      }
+    } else {
+      const { output, encoding } = mcache.get(key);
+      res.setHeader('Content-Encoding', encoding);
+      send(output);
+    }
+    send(output);
+  }
+})));
 
 const accessLogStream = fs.createWriteStream(ROOT + '/morgan.log', {flags: 'a'})
 
@@ -71,9 +109,10 @@ app.use(cacheControl, express.static(path.join(ROOT, 'dist/client'), {index: fal
 /////////////////////////
 // ** Example API
 // Notice API should be in aseparate process
-import { postsApi } from './backend/api';
+import { postsApi, photosApi } from './backend/api';
 // Our API for demos only
 app.use('/api', postsApi());
+app.use('/photosApi', photosApi());
 
 function ngApp(req, res) {
   res.render('index', {
@@ -105,6 +144,17 @@ app.get('*', function(req, res) {
 });
 
 // Server
+/*
+var options = {
+  hostname: 'localhost',
+  key: fs.readFileSync('./server.key'),
+  cert: fs.readFileSync('./server.crt')
+};
+spdy.createServer(options, app).listen(3000, function() {
+  console.log(`https on: http://localhost:3000`);
+});
+*/
+
 let server = app.listen(app.get('port'), () => {
   console.log(`Listening on: http://localhost:${server.address().port}`);
 });

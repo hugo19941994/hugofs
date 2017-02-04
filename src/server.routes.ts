@@ -12,5 +12,6 @@
 export const routes: string[] = [
   'home',
   'blog',
-  'projects'
+  'projects',
+  'photos'
 ];
