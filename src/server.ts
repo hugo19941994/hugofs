@@ -9,7 +9,6 @@ import './__workaround.node'; // temporary until 2.1.1 things are patched in Cor
 import * as path from 'path';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
-import * as cookieParser from 'cookie-parser';
 import * as morgan from 'morgan';
 import * as compression from 'compression';
 
@@ -45,7 +44,6 @@ app.set('views', __dirname);
 app.set('view engine', 'html');
 app.set('json spaces', 2);
 
-app.use(cookieParser('Angular 2 Universal'));
 app.use(bodyParser.json());
 app.use(compression());
 

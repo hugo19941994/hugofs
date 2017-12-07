@@ -10,7 +10,6 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
-import * as cookieParser from 'cookie-parser';
 import * as morgan from 'morgan';
 import * as mcache from 'memory-cache';
 
@@ -49,12 +48,11 @@ app.engine('.html', createEngine({
     // stateless providers only since it's shared
   ]
 }));
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3002);
 app.set('views', __dirname);
 app.set('view engine', 'html');
 app.set('json spaces', 2);
 
-app.use(cookieParser('Angular 2 Universal'));
 app.use(bodyParser.json());
 
 app.use(interceptor((req, res)=>({
