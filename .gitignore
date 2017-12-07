@@ -18,5 +18,3 @@ webpack.records.json
 /npm-debug.log.*
 
 morgan.log
-
-photos/

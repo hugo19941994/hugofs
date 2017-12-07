@@ -1,0 +1,30 @@
+.photos {
+  column-count: 1;
+  column-gap: 0px;
+  max-width: 500px;
+}
+
+@media (min-width: 890px) {
+  .photos {
+    column-count: 2;
+    max-width: 100%;
+  }
+}
+@media (min-width: 1200px) {
+  .photos {
+    column-count: 3;
+    max-width: 100%;
+  }
+}
+
+.photo {
+  padding: 2px;
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+}
+
+.photo >>> img {
+  height: auto;
+  width: 100%;
+}

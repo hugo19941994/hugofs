@@ -1,0 +1,7 @@
+<div class="photos">
+  <div class="wrapper">
+    <div class="photo" *ngFor="let photo of photos">
+      <a href="/photosApi/bigphoto/{{photo.num}}"><img [src]="'data:image/jpg;base64,'+photo.photo" /></a>
+    </div>
+  </div>
+</div>
