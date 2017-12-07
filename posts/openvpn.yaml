@@ -18,13 +18,13 @@ text: |
 
   ## x509 Key size
 
-  When generating your CA, server and client certificates set _at least_ 2048 bit key lengths. 1024 bit keys are no longer deemed secure. 2048 bits are secure for years to come, but if you are aparanoid 4096 bit keys are also common. However, CPU usage, key generation time and TLS handshakes will take longer.
+  When generating your CA, server and client certificates set _at least_ 2048 bit key lengths. 1024 bit keys are no longer deemed secure. 2048 bits are secure for years to come, but if you are paranoid 4096 bit keys are also common. However, CPU usage, key generation time and TLS handshakes will take longer.
 
   To increase the key sizes you must edit your vars file within easyrsa.
 
   ## DH parameters length
 
-  2048 bits is considered secure, but you might want to generate a 4096 one. Genrating these parameters takes quite a while, depending on the machine, and the amount of time only increases as the size of the key goes up.
+  2048 bits is considered secure, but you might want to generate a 4096 one. Generating these parameters takes quite a while, depending on the machine, and the amount of time only increases as the size of the key goes up.
 
   # Hardening the control channel
 
@@ -94,7 +94,7 @@ text: |
 
   It's also harder to do port scanning with UDP. Therefore, if you can, use UDP.
 
-  In my university UDP is blocked (along with most TCP port). Therefor I use TCP and port 443\. Unless you are behind a very sophisticated firewall with deep packet inspection this setup works for me.
+  In my university UDP is blocked (along with most TCP ports). Therefore I use TCP and port 443\. Unless you are behind a very sophisticated firewall with deep packet inspection this setup works for me.
 
   # Android & iPhone
 
