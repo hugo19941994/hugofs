@@ -69,7 +69,7 @@ function postsApi() {
       files.forEach((file) => {
         return fs.readFileAsync('./posts/' + file)
         .then((a) => {
-          if (yaml.load(a).title == req.params.post_id) {
+          if (yaml.load(a).title == req.params.post_id.replace(/_/g, ' ')) {
             let r = yaml.load(a)
             marked(r.text, function (err, content) {
               r.text = content;

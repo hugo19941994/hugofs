@@ -23,6 +23,7 @@ export class BlogComponent {
 
   selectPost(id): void {
     this.viewService.view = false;
-    this.router.navigate([`/blog/${id.title}`]);
+    let url = `/blog/${id.title}`.replace(/ /g, '_');
+    this.router.navigate([url]);
   }
 }
