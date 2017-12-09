@@ -1,7 +1,7 @@
 @font-face {
   font-family: "PlayfairDisplay";
   src:  url(/assets/PlayfairDisplay-Regular.woff2) format("woff2"),
-        url(/assets/PlayfairDisplay-Regular.ttf) format("truetype");
+  url(/assets/PlayfairDisplay-Regular.ttf) format("truetype");
 }
 
 .title {
@@ -21,7 +21,7 @@
 }
 
 a {
-    text-decoration: none !important;
+  text-decoration: none !important;
 }
 
 .post-wrap {

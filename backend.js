@@ -7,17 +7,22 @@ var yaml = require('js-yaml');
 var querystring = require('querystring');
 var gm = require('gm');
 var Rx = require('rxjs/Rx')
+var path = require('path');
+var express = require('express');
+var bodyParser = require('body-parser');
+var morgan = require('morgan');
+var compression = require('compression');
 Promise.promisifyAll(gm.prototype);
 
-export function photosApi() {
+function photosApi() {
   var router = Router()
 
   let images = []
 
-  fs.readdirAsync('./photos/')
-  .each((folder : any) => {
-    return fs.readdirAsync('./photos/' + folder).each((file : any) => {
-      images.push('./photos/' + folder + '/' + file)
+  fs.readdirAsync(__dirname + '/photos/')
+  .each((folder) => {
+    return fs.readdirAsync(__dirname + '/photos/' + folder).each((file) => {
+      images.push(__dirname + '/photos/' + folder + '/' + file)
     })
   })
 
@@ -40,13 +45,13 @@ export function photosApi() {
 
   router.route('/bigphoto/:id')
   .get(function (req, res) {
-    res.sendfile(images[req.params.id])
+    res.sendFile(images[req.params.id])
   })
 
   return router;
 }
 
-export function postsApi() {
+function postsApi() {
   var router = Router()
 
   marked.setOptions({
@@ -60,14 +65,15 @@ export function postsApi() {
   router.route('/post/:post_id')
   .get(function (req, res) {
     return fs.readdirAsync('./posts/')
-    .then((files : any) => {
+    .then((files) => {
       files.forEach((file) => {
         return fs.readFileAsync('./posts/' + file)
-        .then((a : any) => {
+        .then((a) => {
           if (yaml.load(a).title == req.params.post_id) {
             let r = yaml.load(a)
             marked(r.text, function (err, content) {
               r.text = content;
+                //console.log(err)
               res.json(r)
             })
           }
@@ -88,9 +94,9 @@ export function postsApi() {
   .get(function(req, res) {
     let r = []
     fs.readdirAsync('./posts/')
-    .each((file : any) => {
+    .each((file) => {
       return fs.readFileAsync('./posts/' + file)
-      .then((a : any) => {
+      .then((a) => {
         let doc = yaml.load(a)
         r.push({"title": doc.title, "date": doc.date})
       })
@@ -103,3 +109,19 @@ export function postsApi() {
   return router
 }
 
+const app = express();
+const ROOT = path.join(path.resolve(__dirname, '..'));
+
+app.set('port', process.env.PORT || 3060);
+app.use(bodyParser.json());
+app.use(compression());
+
+function cacheControl(req, res, next) {
+  // instruct browser to revalidate in 60 seconds
+  res.header('Cache-Control', 'max-age=60');
+  next();
+}
+
+app.use('/api', postsApi());
+app.use('/photosApi', photosApi());
+app.listen(3060)

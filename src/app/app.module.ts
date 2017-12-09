@@ -1,29 +1,43 @@
+import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { HttpModule } from '@angular/http';
 
-import { HomeModule } from './home/home.module';
-import { ProjectsModule } from './projects/projects.module';
-import { BlogModule } from './blog/blog.module';
-import { PhotosModule } from './photos/photos.module';
+import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
 
-import { SharedModule } from './shared/shared.module';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent, XLargeDirective } from './app.component';
-
+import { ProjectsComponent } from './projects/projects.component';
+import { BlogComponent } from './blog/blog.component';
+import { BlogDetailComponent } from './blog/blog-detail.component';
+import { PhotosComponent } from './photos/photos.component';
+import { ViewService } from './shared/view.service';
+import { ApiService } from './shared/api.service';
 
 @NgModule({
-  declarations: [ AppComponent, XLargeDirective ],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    ProjectsComponent,
+    BlogComponent,
+    BlogDetailComponent,
+    PhotosComponent
+  ],
   imports: [
-    SharedModule,
-    HomeModule,
-    ProjectsModule,
-    BlogModule,
-    PhotosModule,
-    AppRoutingModule
-  ]
+    BrowserModule.withServerTransition({appId: 'my-app'}),
+    HttpModule,
+    RouterModule.forRoot([
+      { path: '', component: HomeComponent, pathMatch: 'full'},
+      { path: 'home', component: HomeComponent, pathMatch: 'full'},
+      { path: 'projects', component: ProjectsComponent, pathMatch: 'full'},
+      { path: 'photos', component: PhotosComponent, pathMatch: 'full'},
+      { path: 'blog', component: BlogComponent, children: [{ path: ':id', component: BlogDetailComponent}]}
+    ])
+  ],
+  providers: [
+    ViewService,
+    ApiService
+  ],
+  bootstrap: [AppComponent]
 })
-export class AppModule {
-}
 
-export { AppComponent } from './app.component';
+export class AppModule { }
