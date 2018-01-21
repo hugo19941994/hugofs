@@ -16,21 +16,14 @@ export class PhotosComponent {
   max = 0;
 
   constructor(private http: Http, private router: Router, private changeDetectorRef: ChangeDetectorRef) {
+    // Doesn't work on server. Must use full address
     this.http.get('/photosApi/photos/')
       .map((res: Response) => res.json())
       .subscribe(
         data => {
           this.max = data;
-          if (window.innerHeight > document.body.offsetHeight) {
-            this.nextImage();
-            this.nextImage();
-            this.nextImage();
-            this.nextImage();
-            this.nextImage();
-            this.nextImage();
-            this.nextImage();
-            this.nextImage();
-          }
+          // Find a better way of not loading everything
+          for (let i = 0; i < this.max; ++i) this.nextImage();
         }
       );
   }

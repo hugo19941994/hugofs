@@ -21,9 +21,11 @@ function photosApi() {
 
   fs.readdirAsync(__dirname + '/photos/')
   .each((folder) => {
-    return fs.readdirAsync(__dirname + '/photos/' + folder).each((file) => {
-      images.push(__dirname + '/photos/' + folder + '/' + file)
-    })
+    if (folder !== ".gitignore") {
+      return fs.readdirAsync(__dirname + '/photos/' + folder).each((file) => {
+        images.push(__dirname + '/photos/' + folder + '/' + file)
+      })
+    }
   })
 
   router.route('/photos')
