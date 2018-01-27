@@ -24,6 +24,10 @@ a {
   text-decoration: none !important;
 }
 
+img {
+  max-width: 100%;
+}
+
 .post-wrap {
   margin: 0 auto;
   margin-left: auto;
