@@ -8,6 +8,7 @@
     "no-unnecessary-class": false,
     "directive-selector": false,
     "component-selector": false,
-    "indent": [true, "spaces", 2]
+    "indent": [true, "spaces", 2],
+    "i18n": false
   }
 }
