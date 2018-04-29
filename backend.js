@@ -6,7 +6,6 @@ var marked = require('marked');
 var yaml = require('js-yaml');
 var querystring = require('querystring');
 var gm = require('gm');
-var Rx = require('rxjs/Rx')
 var path = require('path');
 var express = require('express');
 var bodyParser = require('body-parser');
