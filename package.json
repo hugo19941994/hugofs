@@ -57,7 +57,7 @@
     "@angular/cli": "^6.0.0-rc.4",
     "@angular/compiler-cli": "^6.0.0-rc.4",
     "@angular/language-service": "^6.0.0-rc.4",
-    "@types/node": "^9.6.7",
+    "@types/node": "^10.0.0",
     "codelyzer": "^4.3.0",
     "compression": "^1.7.2",
     "cpy-cli": "^1.0.1",
