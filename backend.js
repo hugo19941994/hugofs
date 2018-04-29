@@ -64,11 +64,13 @@ app.get('/photosApi/photo/:id', (req, res, next) => {
     // Checks for webp support
     if (req.get('accept').indexOf('image/webp') > -1) {
       return sharp(images[req.params.id]).resize(500).webp().toBuffer().then(data => {
-        res.json({photo: data.toString('base64'), num: req.params.id})
+        res.type('image/webp');
+        res.send(data)
       });
     } else {
       return sharp(images[req.params.id]).resize(500).jpeg({progressive: true}).toBuffer().then(data => {
-        res.json({photo: data.toString('base64'), num: req.params.id})
+        res.type('image/jpeg');
+        res.send(data)
       });
     }
   }

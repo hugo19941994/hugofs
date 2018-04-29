@@ -55,11 +55,11 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ng-universal-demo:build"
+            "browserTarget": "hugofs:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ng-universal-demo:build:production"
+              "browserTarget": "hugofs:build:production"
             }
           }
         },
