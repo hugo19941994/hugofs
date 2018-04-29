@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Inject, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Event, NavigationEnd, Router } from '@angular/router';
-import { Http, Response } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { ViewService } from '../shared/view.service';
 
 @Component({
@@ -12,7 +12,7 @@ export class BlogDetailComponent {
   data: any = [];
   id: string;
 
-  constructor(private http: Http, private route: ActivatedRoute, private router: Router, public viewService: ViewService) {
+  constructor(private httpClient: HttpClient, private route: ActivatedRoute, private router: Router, public viewService: ViewService) {
     this.route.params.subscribe(params => {
       this.selectPost(params['id']);
     });
@@ -25,8 +25,7 @@ export class BlogDetailComponent {
   }
 
   selectPost(id: string): void {
-    this.http.get(`/api/post/${id}`)
-    .map((res: Response) => res.json())
+    this.httpClient.get(`/api/post/${id}`)
     .subscribe(
       data => {
         this.data = data;

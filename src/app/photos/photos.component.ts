@@ -1,8 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, Inject, ViewEncapsulation } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/fromEvent';
 
 @Component({
   selector: 'photos',
@@ -15,10 +13,9 @@ export class PhotosComponent {
   maxImage = -1;
   max = 0;
 
-  constructor(private http: Http, private router: Router, private changeDetectorRef: ChangeDetectorRef) {
+  constructor(private httpClient: HttpClient, private router: Router, private changeDetectorRef: ChangeDetectorRef) {
     // Doesn't work on server. Must use full address
-    this.http.get('/photosApi/photos/')
-      .map((res: Response) => res.json())
+    this.httpClient.get<number>('/photosApi/photos/')
       .subscribe(
         data => {
           this.max = data;
@@ -36,8 +33,7 @@ export class PhotosComponent {
     if (this.max - 1 > this.maxImage) {
       this.maxImage++;
 
-      this.http.get(`/photosApi/photo/${this.maxImage}`)
-        .map((res: Response) => res.json())
+      this.httpClient.get<any>(`/photosApi/photo/${this.maxImage}`)
         .subscribe(data => {
           this.photos.push(data);
           this.changeDetectorRef.detectChanges();

@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 
+import { TransferHttpCacheModule } from '@nguniversal/common';
+
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 
@@ -11,7 +13,6 @@ import { BlogComponent } from './blog/blog.component';
 import { BlogDetailComponent } from './blog/blog-detail.component';
 import { PhotosComponent } from './photos/photos.component';
 import { ViewService } from './shared/view.service';
-import { ApiService } from './shared/api.service';
 
 @NgModule({
   declarations: [
@@ -31,11 +32,11 @@ import { ApiService } from './shared/api.service';
       { path: 'projects', component: ProjectsComponent, pathMatch: 'full'},
       { path: 'photos', component: PhotosComponent, pathMatch: 'full'},
       { path: 'blog', component: BlogComponent, children: [{ path: ':id', component: BlogDetailComponent}]}
-    ])
+    ]),
+    TransferHttpCacheModule
   ],
   providers: [
-    ViewService,
-    ApiService
+    ViewService
   ],
   bootstrap: [AppComponent]
 })

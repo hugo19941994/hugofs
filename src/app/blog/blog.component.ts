@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Inject, ViewEncapsulation } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { BlogDetailComponent } from './blog-detail.component';
 import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
 import { ViewService } from '../shared/view.service';
@@ -12,10 +12,9 @@ import { ViewService } from '../shared/view.service';
 export class BlogComponent {
   posts = [];
 
-  constructor(private http: Http, private router: Router, public viewService: ViewService) {
+  constructor(private httpClient: HttpClient, private router: Router, public viewService: ViewService) {
     // Show list if the user is coming back to /blog
-    this.http.get('/api/posts')
-      .map((res: Response) => res.json())
+    this.httpClient.get<any>('/api/posts')
       .subscribe(
         data => { this.posts = data; }
       );
