@@ -6,22 +6,22 @@
     "type": "git",
     "url": "https://github.com/hugo19941994/hugofs.git"
   },
-  "contributors": [
-    "Hugo Ferrando Seage <me@hugofs.com>"
-  ],
-  "pre-commit": [
-    "lint"
-  ],
+  "contributors": ["Hugo Ferrando Seage <me@hugofs.com>"],
+  "pre-commit": ["lint"],
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "lint": "ng lint",
-    "build:client-and-server-bundles": "ng build --prod && ng run hugofs:server",
-    "build:prerender": "npm run build:client-and-server-bundles && npm run webpack:server && npm run generate:prerender",
-    "build:ssr": "npm run build:client-and-server-bundles && npm run webpack:server",
+    "build:client-and-server-bundles":
+      "ng build --prod && ng run hugofs:server",
+    "build:prerender":
+      "npm run build:client-and-server-bundles && npm run webpack:server && npm run generate:prerender",
+    "build:ssr":
+      "npm run build:client-and-server-bundles && npm run webpack:server",
     "generate:prerender": "cd dist && node prerender",
-    "webpack:server": "webpack --config webpack.server.config.js --progress --colors",
+    "webpack:server":
+      "webpack --config webpack.server.config.js --progress --colors",
     "serve:prerender": "cd dist/browser && http-server",
     "serve:ssr": "node dist/server"
   },
@@ -41,13 +41,11 @@
     "@nguniversal/express-engine": "6.0.0-rc.2",
     "@nguniversal/module-map-ngfactory-loader": "6.0.0-rc.2",
     "angular-tslint-rules": "^1.3.0",
-    "bluebird": "^3.5.1",
     "core-js": "^2.5.5",
-    "gm": "^1.23.1",
     "highlight.js": "^9.12.0",
     "marked": "^0.3.19",
-    "morgan": "^1.9.0",
     "rxjs": "^6.0.0-rc.0",
+    "sharp": "^0.20.2",
     "webpack": "^4.5.0",
     "webpack-cli": "^2.0.14",
     "zone.js": "^0.8.26"
