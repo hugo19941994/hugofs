@@ -1,16 +1,11 @@
-var util = require('util');
 var {Router} = require('express');
 var Promise = require("bluebird");
 var fs = Promise.promisifyAll(require('fs'));
 var marked = require('marked');
 var yaml = require('js-yaml');
-var querystring = require('querystring');
 var gm = require('gm');
-var Rx = require('rxjs/Rx')
-var path = require('path');
 var express = require('express');
 var bodyParser = require('body-parser');
-var morgan = require('morgan');
 var compression = require('compression');
 Promise.promisifyAll(gm.prototype);
 
@@ -112,18 +107,16 @@ function postsApi() {
 }
 
 const app = express();
-const ROOT = path.join(path.resolve(__dirname, '..'));
 
+// Port
 app.set('port', process.env.PORT || 3060);
+
+// Middleware
 app.use(bodyParser.json());
 app.use(compression());
 
-function cacheControl(req, res, next) {
-  // instruct browser to revalidate in 60 seconds
-  res.header('Cache-Control', 'max-age=60');
-  next();
-}
-
+// Endpoints
 app.use('/api', postsApi());
 app.use('/photosApi', photosApi());
-app.listen(3060)
+
+app.listen(app.get('port'))

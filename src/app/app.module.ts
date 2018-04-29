@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { TransferHttpCacheModule } from '@nguniversal/common';
 
@@ -25,7 +25,7 @@ import { ViewService } from './shared/view.service';
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'my-app'}),
-    HttpModule,
+    HttpClientModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full'},
       { path: 'home', component: HomeComponent, pathMatch: 'full'},
