@@ -8,8 +8,6 @@ module.exports = {
   entry: {
     // This is our Express server for Dynamic universal
     server: './server.ts',
-    // This is an example of Static prerendering (generative)
-    prerender: './prerender.ts'
   },
   target: 'node',
   resolve: { extensions: ['.ts', '.js'] },

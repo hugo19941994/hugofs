@@ -9,10 +9,10 @@ const yaml = require('js-yaml');
 const readdir = util.promisify(fs.readdir);
 const readFile = util.promisify(fs.readFile);
 
-let images = []
+let images = [];
 
 async function prepare_photos() {
-  const dir = `${__dirname}/photos/`
+  const dir = `${__dirname}/photos/`;
   const folders = await readdir(dir);
 
   for (let folder of folders) {
@@ -31,7 +31,7 @@ async function prepare_photos() {
 try {
   prepare_photos();
 } catch (err) {
-  console.log(err)
+  console.log(err);
 }
 
 // Highlighting options
@@ -65,12 +65,12 @@ app.get('/photosApi/photo/:id', (req, res, next) => {
     if (req.get('accept').indexOf('image/webp') > -1) {
       return sharp(images[req.params.id]).resize(500).webp().toBuffer().then(data => {
         res.type('image/webp');
-        res.send(data)
+        res.send(data);
       });
     } else {
       return sharp(images[req.params.id]).resize(500).jpeg({progressive: true}).toBuffer().then(data => {
         res.type('image/jpeg');
-        res.send(data)
+        res.send(data);
       });
     }
   }
@@ -121,6 +121,6 @@ app.get('/api/posts', async (req, res, next) => {
   }
 
   res.json(r.sort(compare));
-})
+});
 
 app.listen(app.get('port'));
