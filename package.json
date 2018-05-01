@@ -6,20 +6,25 @@
     "type": "git",
     "url": "https://github.com/hugo19941994/hugofs.git"
   },
-  "contributors": [
-    "Hugo Ferrando Seage <me@hugofs.com>"
-  ],
-  "pre-commit": [
-    "lint"
-  ],
+  "author": "Hugo Ferrando Seage <me@hugofs.com> (https://hugofs.com)",
+  "description": "My personal website built with Angular",
+  "homepage": "https://hugofs.com",
+  "bugs": {
+    "url": "https://github.com/hugo19941994/hugofs/issues",
+    "email": "me@hugofs.com"
+  },
+  "pre-commit": ["lint"],
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "lint": "ng lint",
-    "build:client-and-server-bundles": "ng build --prod && ng run hugofs:server",
-    "build:ssr": "npm run build:client-and-server-bundles && npm run webpack:server",
-    "webpack:server": "webpack --config webpack.server.config.js --progress --colors",
+    "build:client-and-server-bundles":
+      "ng build --prod && ng run hugofs:server",
+    "build:ssr":
+      "npm run build:client-and-server-bundles && npm run webpack:server",
+    "webpack:server":
+      "webpack --config webpack.server.config.js --progress --colors",
     "serve:ssr": "node dist/server"
   },
   "private": false,
