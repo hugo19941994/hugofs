@@ -13,18 +13,17 @@
     "url": "https://github.com/hugo19941994/hugofs/issues",
     "email": "me@hugofs.com"
   },
-  "pre-commit": ["lint"],
+  "pre-commit": [
+    "lint"
+  ],
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "lint": "ng lint",
-    "build:client-and-server-bundles":
-      "ng build --prod && ng run hugofs:server",
-    "build:ssr":
-      "npm run build:client-and-server-bundles && npm run webpack:server",
-    "webpack:server":
-      "webpack --config webpack.server.config.js --progress --colors",
+    "build:client-and-server-bundles": "ng build --prod && ng run hugofs:server",
+    "build:ssr": "npm run build:client-and-server-bundles && npm run webpack:server",
+    "webpack:server": "webpack --config webpack.server.config.js --progress --colors",
     "serve:ssr": "node dist/server"
   },
   "private": false,
@@ -66,6 +65,7 @@
     "reflect-metadata": "^0.1.12",
     "ts-loader": "^4.2.0",
     "tslint": "^5.9.1",
+    "tslint-config-prettier": "^1.12.0",
     "typescript": ">=2.7.2 <2.8.0"
   }
 }
