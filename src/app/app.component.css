@@ -1,7 +1,6 @@
 @font-face {
   font-family: "Raleway";
-  src:  url(/assets/fonts/Raleway-Light.woff2) format("woff2"),
-  url(/assets/fonts/Raleway-Light.ttf) format("truetype");
+  src:  url(/assets/fonts/Raleway-Light.woff2) format("woff2");
 }
 
 * {
@@ -32,13 +31,6 @@ button a {
   text-decoration: none;
 }
 
-
-#universal {
-  text-align: center;
-  font-weight: bold;
-  padding: 15px 0;
-}
-
 nav {
   min-height: 40px;
   margin-top: 10px;
@@ -53,15 +45,6 @@ nav {
   display: block;
   padding: 20px;
   min-width: 0;
-}
-
-.router-link-active {
-  background-color: rgba(0, 0, 0, 0.12);
-  border-radius: 4px;
-}
-
-pre {
-  font-size: 12px;
 }
 
 .page {
@@ -134,9 +117,5 @@ pre {
   .container2 {
     /* On small screens, we are no longer using row direction but column */
     flex-direction: column;
-  }
-
-  .hugo-img img {
-    max-height: 200px;
   }
 }
