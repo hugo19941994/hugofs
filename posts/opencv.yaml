@@ -2,7 +2,7 @@
 title: Setting up OpenCV 3 on Android
 date: "2015-09-30"
 text: |
-  ![](/assets/Rick.png)
+  ![](/assets/blog/Rick.png)
   # Requirements
 
   *   [Android Studio 1.3+](http://developer.android.com/sdk/index.html)
@@ -55,7 +55,7 @@ text: |
 
   ## Setting up a new project
 
-  ![](/assets/folders.PNG)
+  ![](/assets/blog/folders.png)
 
   1.  Create a new Android Gradle project with Android Studio
   2.  [Activate Gradle 2.5 (experimental for now)](https://sites.google.com/a/android.com/tools/tech-docs/new-build-system/gradle-experimental)
