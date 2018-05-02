@@ -1,6 +1,6 @@
 {
   "rulesDirectory": ["node_modules/codelyzer"],
-  "extends": ["angular-tslint-rules"],
+  "extends": ["angular-tslint-rules", "tslint-config-prettier"],
   "rules": {
     "import-blacklist": [true, "rxjs", "rxjs/Rx", "rxjs/operators"],
     "trackBy-function": false,

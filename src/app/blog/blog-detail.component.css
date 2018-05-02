@@ -2,8 +2,7 @@
 
 @font-face {
   font-family: "PlayfairDisplay";
-  src:  url(/assets/PlayfairDisplay-Regular.woff2) format("woff2"),
-  url(/assets/PlayfairDisplay-Regular.ttf) format("truetype");
+  src:  url(/assets/fonts/PlayfairDisplay-Regular.woff2) format("woff2");
 }
 
 .title {
@@ -24,10 +23,6 @@
 
 a {
   text-decoration: none !important;
-}
-
-img {
-  max-width: 100%;
 }
 
 .post-wrap {
