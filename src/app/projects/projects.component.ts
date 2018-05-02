@@ -13,7 +13,7 @@ import {
   templateUrl: "./projects.component.html"
 })
 export class ProjectsComponent {
-  private projects = [] as Array<Project>;
+  projects = [] as Array<Project>;
 
   constructor() {
     const spaceInvaders = new Project(
