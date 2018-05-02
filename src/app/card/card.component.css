@@ -1,0 +1,52 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.hugo-image {
+  max-height: 100%;
+  height: auto;
+  width: auto;
+  position: relative;
+  overflow: hidden;
+  margin: 10px;
+  text-align: center;
+}
+
+.hugo-image img {
+  display: inline;
+  max-height: 100%;
+  width: auto;
+  max-width: 100%;
+  border-radius: 50%;
+}
+
+.name {
+  color: #fff;
+  text-align: center;
+}
+
+.logos {
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.logos img {
+  width: 30px;
+}
+
+.intro-card {
+  padding: 20px;
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+  transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: box-shadow;
+  background: #424242;
+}
+
+.resume a {
+  text-decoration: none;
+  color: #fff;
+}

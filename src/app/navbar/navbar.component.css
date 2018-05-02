@@ -1,0 +1,30 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Raleway", sans-serif;
+}
+
+nav {
+  min-height: 40px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+button {
+  background-color: inherit;
+  cursor: pointer;
+  border: none;
+  color: white;
+  padding: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  text-decoration: none;
+  color: #ffffff;
+  display: inline-block;
+  line-height: 5px;
+}

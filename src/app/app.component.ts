@@ -1,6 +1,8 @@
 import { Component } from "@angular/core";
 import { Meta, Title } from "@angular/platform-browser";
 import { ViewService } from "./shared/view.service";
+import { CardComponent } from "./card/card.component";
+import { NavbarComponent } from "./navbar/navbar.component";
 
 @Component({
   selector: "app-root",
