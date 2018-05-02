@@ -17,6 +17,7 @@ import { ViewService } from "../shared/view.service";
 })
 export class BlogDetailComponent {
   post: Post = {} as Post;
+  loadAPI: Promise<any>;
 
   constructor(
     private httpClient: HttpClient,
@@ -33,6 +34,11 @@ export class BlogDetailComponent {
         if (val.url.match("/blog/")) viewService.view = false;
       } else viewService.view = true;
     });
+
+    this.loadAPI = new Promise(resolve => {
+      this.loadScript();
+      resolve(true);
+    });
   }
 
   selectPost(id: string): void {
@@ -43,6 +49,26 @@ export class BlogDetailComponent {
 
   back(): void {
     this.router.navigate(["../"], { relativeTo: this.route });
+  }
+
+  loadScript(): void {
+    const scripts = document.getElementsByTagName("script");
+
+    // Remove script
+    // tslint:disable-next-line
+    for (let i = 0; i < scripts.length; ++i)
+      if (
+        scripts[i].getAttribute("src") ===
+        "https://hugofs.com/isso/js/embed.min.js"
+      )
+        scripts[i].parentNode.removeChild(scripts[i]);
+
+    // Add script
+    const node = document.createElement("script");
+    node.src = "https://hugofs.com/isso/js/embed.min.js";
+    node.setAttribute("data-isso", "https://hugofs.com/isso/");
+    node.setAttribute("data-isso-css", "false");
+    document.getElementsByTagName("head")[0].appendChild(node);
   }
 }
 
