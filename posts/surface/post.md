@@ -1,4 +1,4 @@
-<img width="100%" height="auto" src="/assets/blog/DSC_6733-2.jpg">
+![Arch Linux running on a first generation Microsoft Surface](/assets/blog/DSC_6733-2.jpg)
 
 ## Motivation
 

@@ -1,4 +1,4 @@
-<img width="100%" height="auto" src="/assets/blog/OpenVPN.png">
+![OpenVPN ascii art](/assets/blog/OpenVPN.png)
 
 # Intro
 

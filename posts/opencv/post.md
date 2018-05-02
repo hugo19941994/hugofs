@@ -1,4 +1,4 @@
-![](/assets/blog/Rick.png)
+![Rick from Rick and Morty!](/assets/blog/Rick.png)
 
 # Requirements
 
@@ -54,7 +54,7 @@ You can also follow these same steps but only compile the extra modules. After t
 
 ## Setting up a new project
 
-![](/assets/blog/folders.png)
+![Folder structure in Android Studio](/assets/blog/folders.png)
 
 1.  Create a new Android Gradle project with Android Studio
 2.  [Activate Gradle 2.5 (experimental for now)](https://sites.google.com/a/android.com/tools/tech-docs/new-build-system/gradle-experimental)

@@ -64,7 +64,8 @@ marked.setOptions({
       require("highlight.js").highlightAuto(code).value +
       "</code></pre>"
     );
-  }
+  },
+  sanitize: true
 });
 
 const app = express();
