@@ -11,7 +11,9 @@ import { ViewService } from "../shared/view.service";
 @Component({
   selector: "blog-detail",
   styleUrls: ["./blog-detail.component.css"],
-  templateUrl: "./blog-detail.component.html"
+  templateUrl: "./blog-detail.component.html",
+  // tslint:disable-next-line
+  encapsulation: ViewEncapsulation.None // Used to center images
 })
 export class BlogDetailComponent {
   post: Post = {} as Post;
