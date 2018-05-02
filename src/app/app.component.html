@@ -4,7 +4,7 @@
     <navbar></navbar>
 
     <div class="container-internal">
-      <card></card>
+      <card *ngIf="viewService.view"></card>
 
       <div class="outlet">
         <router-outlet></router-outlet>
