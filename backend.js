@@ -32,10 +32,14 @@ async function prepare_posts() {
   const folders = await readdir(dir);
 
   for (let folder of folders) {
-    const data = await readFile(`${dir}${folder}/data.json`, {encoding: 'utf8'});
+    const data = await readFile(`${dir}${folder}/data.json`, {
+      encoding: "utf8"
+    });
     let post_data = JSON.parse(data);
 
-    const post = await readFile(`${dir}${folder}/post.md`, {encoding: 'utf8'});
+    const post = await readFile(`${dir}${folder}/post.md`, {
+      encoding: "utf8"
+    });
     marked(post, (err, content) => {
       post_data["text"] = content;
 
@@ -72,11 +76,11 @@ app.set("port", process.env.PORT || 3060);
 app.use(compression());
 
 // Endpoints
-app.get("/photosApi/photos", (req, res, next) => {
+app.get("/api/photos", (req, res, next) => {
   res.json(images.length);
 });
 
-app.get("/photosApi/photo/:id", (req, res, next) => {
+app.get("/api/photo/:id", (req, res, next) => {
   if (parseInt(req.params.id) > images.length) {
     res.sendStatus(500);
   } else {
@@ -103,11 +107,10 @@ app.get("/photosApi/photo/:id", (req, res, next) => {
   }
 });
 
-app.get("/photosApi/bigphoto/:id", (req, res, next) => {
+app.get("/api/photo-original/:id", (req, res, next) => {
   res.sendFile(images[req.params.id]);
 });
 
-// TODO: Load posts and highlight beforehand
 app.get("/api/post/:post_id", async (req, res, next) => {
   if (req.params.post_id in posts) {
     return res.json(posts[req.params.post_id]);

@@ -11,11 +11,11 @@ export class PhotosComponent {
 
   // TODO: Progressive loading
   constructor(private httpClient: HttpClient) {
-    this.httpClient.get<number>("/photosApi/photos/").subscribe(max => {
+    this.httpClient.get<number>("/api/photos/").subscribe(max => {
       for (let i = 0; i < max; ++i)
         this.photos.push({
-          source: `/photosApi/photo/${i}`,
-          url: `/photosApi/bigphoto/${i}`
+          source: `/api/photo/${i}`,
+          url: `/api/photo-original/${i}`
         });
     });
   }
