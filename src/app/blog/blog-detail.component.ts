@@ -10,7 +10,7 @@ import { ViewService } from "../shared/view.service";
 
 @Component({
   selector: "blog-detail",
-  styleUrls: ["./blog-detail.component.css"],
+  styleUrls: ["./blog-detail.component.css", "./isso.css"],
   templateUrl: "./blog-detail.component.html",
   // tslint:disable-next-line
   encapsulation: ViewEncapsulation.None // Used to center images
@@ -42,9 +42,11 @@ export class BlogDetailComponent {
   }
 
   selectPost(id: string): void {
-    this.httpClient.get<Post>(`/api/post/${id}`).subscribe(data => {
-      this.post = data;
-    });
+    this.httpClient
+      .get<Post>(`http://localhost:3060/api/post/${id}`)
+      .subscribe(data => {
+        this.post = data;
+      });
   }
 
   back(): void {
