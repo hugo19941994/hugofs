@@ -1,14 +1,18 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "outDir": "./dist/out-tsc",
-    "sourceMap": true,
+    "outDir": "../",
+    "sourceMap": false,
     "declaration": false,
     "moduleResolution": "node",
+    "module": "commonjs",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "es5",
+    "target": "es2017",
+    "lib": ["es2017"],
     "typeRoots": ["node_modules/@types"],
-    "lib": ["es2017", "dom"]
-  }
+    "types": ["node"]
+  },
+  "include": ["*.ts"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
 }

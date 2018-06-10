@@ -8,6 +8,8 @@
     "directive-selector": false,
     "component-selector": false,
     "indent": [true, "spaces", 2],
-    "i18n": false
+    "i18n": false,
+    "comment-format": [true, "check-space"],
+    "no-require-imports": false
   }
 }

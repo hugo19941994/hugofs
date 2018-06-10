@@ -11,9 +11,13 @@ npm install
 npm run build:ssr && npm run serve:ssr
 
 # In another shell
-node backend.js
+npm run backend
 ```
 
 ## Comments
 
 To use comments run an instance of [isso](https://github.com/posativ/isso).
+
+## Google Maps
+
+Substitute API key in index.html
