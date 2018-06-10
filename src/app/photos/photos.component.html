@@ -1,7 +1,21 @@
-<div class="photos">
-  <div class="wrapper">
-    <div class="photo" *ngFor="let photo of photos">
-      <a href="{{photo.url}}"><img src="{{photo.source}}"/></a>
+<script
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFz0-kAjt2ZefvIe7bQ2xrM68c28P6KyE&libraries=visualization">
+</script>
+<div class="photo" *ngFor="let set of photos">
+
+  <div class="home-map">
+    <div id="gmap{{set.folder}}" style="width:100%; height:130px; border-top-left-radius: 2px; border-top-right-radius: 2px; background: #000;"></div>
+    <div class="home-map-internal">
+
+      <div class="photos">
+        <div class="wrapper">
+          <div class="photo" *ngFor="let photo of set.images">
+            <a href="http://localhost:3060/api/photo-original/{{set.folder}}/{{photo}}"><img src="http://localhost:3060/api/photo/{{set.folder}}/{{photo}}"/></a>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
+
