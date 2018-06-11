@@ -43,7 +43,7 @@ export class BlogDetailComponent {
 
   selectPost(id: string): void {
     this.httpClient
-      .get<Post>(`http://localhost:3060/api/post/${id}`)
+      .get<Post>(`/api/post/${id}`)
       .subscribe(data => {
         this.post = data;
       });
