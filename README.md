@@ -18,6 +18,6 @@ npm run backend
 
 To use comments run an instance of [isso](https://github.com/posativ/isso).
 
-## Google Maps
+## Google Maps
 
 Substitute API key in index.html
