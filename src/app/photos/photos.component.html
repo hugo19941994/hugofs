@@ -1,6 +1,3 @@
-<script
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFz0-kAjt2ZefvIe7bQ2xrM68c28P6KyE&libraries=visualization">
-</script>
 <div class="photo" *ngFor="let set of photos">
 
   <div class="home-map">
@@ -10,7 +7,7 @@
       <div class="photos">
         <div class="wrapper">
           <div class="photo" *ngFor="let photo of set.images">
-            <a href="http://localhost:3060/api/photo-original/{{set.folder}}/{{photo}}"><img src="http://localhost:3060/api/photo/{{set.folder}}/{{photo}}"/></a>
+            <a href="/api/photo-original/{{set.folder}}/{{photo}}"><img src="/api/photo/{{set.folder}}/{{photo}}"/></a>
           </div>
         </div>
       </div>
