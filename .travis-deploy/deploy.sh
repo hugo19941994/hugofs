@@ -6,6 +6,7 @@ ssh hfs@hugofs.com << EOF
   rm deploy.zip
   cd hugofs
   git clean -f -d
+  rm -rf node_modules
   npm install
   npm run build:ssr
   systemctl --user restart hugofs.service
