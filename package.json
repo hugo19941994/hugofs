@@ -30,7 +30,7 @@
   "private": false,
   "dependencies": {
     "@angular/animations": "^6.0.9",
-    "@angular/common": "^6.0.9",
+    "@angular/common": "^6.1.0",
     "@angular/compiler": "^6.0.9",
     "@angular/core": "^6.0.9",
     "@angular/forms": "^6.0.9",
