@@ -1,3 +1,4 @@
+/// <reference types="googlemaps" />
 import {
   AfterViewInit,
   Component,
@@ -7,7 +8,6 @@ import {
   ViewChildren
 } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import {} from "@types/googlemaps";
 const mapStyle = require("./map_style.json");
 
 @Component({
