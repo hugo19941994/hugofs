@@ -41,7 +41,7 @@
     "@angular/router": "^6.1.4",
     "@nguniversal/common": "6.1.0",
     "@nguniversal/express-engine": "6.1.0",
-    "@nguniversal/module-map-ngfactory-loader": "6.0.0",
+    "@nguniversal/module-map-ngfactory-loader": "6.1.0",
     "@types/googlemaps": "^3.30.12",
     "angular-tslint-rules": "^1.5.0",
     "core-js": "^2.5.7",
