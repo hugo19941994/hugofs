@@ -34,7 +34,7 @@
     "@angular/compiler": "^6.1.10",
     "@angular/core": "^6.1.7",
     "@angular/forms": "^6.1.9",
-    "@angular/http": "^7.0.0",
+    "@angular/http": "^7.0.1",
     "@angular/platform-browser": "^6.1.9",
     "@angular/platform-browser-dynamic": "^7.0.0",
     "@angular/platform-server": "^7.0.0",
