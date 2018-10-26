@@ -32,7 +32,7 @@
     "@angular/animations": "^6.1.8",
     "@angular/common": "^6.1.10",
     "@angular/compiler": "^6.1.10",
-    "@angular/core": "^6.1.7",
+    "@angular/core": "^7.0.1",
     "@angular/forms": "^6.1.9",
     "@angular/http": "^7.0.1",
     "@angular/platform-browser": "^6.1.9",
