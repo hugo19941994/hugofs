@@ -44,7 +44,7 @@
     "@nguniversal/module-map-ngfactory-loader": "7.0.2",
     "@types/googlemaps": "^3.30.16",
     "angular-tslint-rules": "^1.5.0",
-    "core-js": "^2.6.0",
+    "core-js": "^2.6.1",
     "exif": "^0.6.0",
     "highlight.js": "^9.13.1",
     "marked": "^0.5.2",
