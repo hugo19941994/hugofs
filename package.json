@@ -52,7 +52,7 @@
     "sharp": "^0.21.1",
     "webpack": "^4.28.3",
     "webpack-cli": "^3.2.0",
-    "zone.js": "^0.8.27"
+    "zone.js": "^0.8.28"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.12.1",
