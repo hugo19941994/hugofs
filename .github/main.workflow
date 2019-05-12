@@ -8,7 +8,7 @@ workflow "Deploy" {
 action "Run deploy script" {
   needs = "Master"
   uses = "maddox/actions/ssh@master"
-  args = "cd /srv/hugofs && git pull && npm install && sudo /bin/systemctl restart hugofs.service && sudo /bin/systemctl restart hugofsback.service"
+  args = "cd /srv/hugofs && git fetch --all && git reset --hard origin/master && npm install && sudo /bin/systemctl restart hugofs.service && sudo /bin/systemctl restart hugofsback.service"
   secrets = [
     "PRIVATE_KEY",
     "PUBLIC_KEY",
