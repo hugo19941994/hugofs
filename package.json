@@ -18,6 +18,7 @@
   ],
   "scripts": {
     "backend": "tsc -p backend/tsconfig.backend.json && node main.js",
+    "tsc": "tsc",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
