@@ -43,7 +43,7 @@
     "@nguniversal/common": "7.0.2",
     "@nguniversal/express-engine": "7.0.2",
     "@nguniversal/module-map-ngfactory-loader": "7.0.2",
-    "@types/googlemaps": "^3.30.19",
+    "@types/googlemaps": "^3.30.20",
     "angular-tslint-rules": "^1.5.0",
     "core-js": "^2.6.5",
     "exif": "^0.6.0",
