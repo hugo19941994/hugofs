@@ -1,3 +1,4 @@
+import { HttpClient } from "@angular/common/http";
 import {
   ChangeDetectionStrategy,
   Component,
@@ -5,7 +6,6 @@ import {
   ViewEncapsulation
 } from "@angular/core";
 import { ActivatedRoute, Event, NavigationEnd, Router } from "@angular/router";
-import { HttpClient } from "@angular/common/http";
 import { ViewService } from "../shared/view.service";
 
 @Component({
@@ -16,23 +16,25 @@ import { ViewService } from "../shared/view.service";
   encapsulation: ViewEncapsulation.None // Used to center images
 })
 export class BlogDetailComponent {
-  post: Post = {} as Post;
+  post: Post = {"title": "", "date": "", "text": ""};
   loadAPI: Promise<any>;
 
   constructor(
-    private httpClient: HttpClient,
-    private route: ActivatedRoute,
-    private router: Router,
+    private readonly httpClient: HttpClient,
+    private readonly route: ActivatedRoute,
+    private readonly router: Router,
     public viewService: ViewService
   ) {
     this.route.params.subscribe(params => {
-      this.selectPost(params["id"]);
+      this.selectPost(params.id);
     });
 
     router.events.subscribe((val: Event) => {
       if (val instanceof NavigationEnd) {
-        if (val.url.match("/blog/")) viewService.view = false;
-      } else viewService.view = true;
+        if (val.url.match("/blog/")) { viewService.view = false };
+      } else {
+        viewService.view = true
+      };
     });
 
     this.loadAPI = new Promise(resolve => {
@@ -50,7 +52,10 @@ export class BlogDetailComponent {
   }
 
   back(): void {
-    this.router.navigate(["../"], { relativeTo: this.route });
+    this.router.navigate(["../"], { relativeTo: this.route })
+    .catch((err): void => {
+      console.error(err);
+    });
   }
 
   loadScript(): void {
@@ -62,8 +67,9 @@ export class BlogDetailComponent {
       if (
         scripts[i].getAttribute("src") ===
         "https://hugofs.com/isso/js/embed.min.js"
-      )
+      ) {
         scripts[i].parentNode.removeChild(scripts[i]);
+      }
 
     // Add script
     const node = document.createElement("script");

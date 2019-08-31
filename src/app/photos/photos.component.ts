@@ -1,4 +1,4 @@
-/// <reference types="googlemaps" />
+import { HttpClient } from "@angular/common/http";
 import {
   AfterViewInit,
   Component,
@@ -7,7 +7,6 @@ import {
   Renderer2,
   ViewChildren
 } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
 const mapStyle = require("./map_style.json");
 
 @Component({
@@ -22,12 +21,12 @@ export class PhotosComponent implements AfterViewInit {
   @ViewChildren("photo") photoDiv: QueryList<any>;
   ngAfterViewInit(): void {
     this.photoDiv.changes.subscribe(() => {
-      for (const collection of this.photos) this.prepareMap(collection);
+      for (const collection of this.photos) { this.prepareMap(collection) };
     });
   }
 
   // TODO: Progressive loading
-  constructor(private httpClient: HttpClient, private renderer: Renderer2) {
+  constructor(private readonly httpClient: HttpClient, private readonly renderer: Renderer2) {
     // Load photo data
     this.httpClient
       .get<Array<any>>("/api/photos/")
@@ -55,8 +54,10 @@ export class PhotosComponent implements AfterViewInit {
     map.setMapTypeId("styled_map");
 
     const heatmapData = [];
-    for (const heat of collection.heatmap)
+    for (const heat of collection.heatmap) {
       heatmapData.push(new google.maps.LatLng(heat.lat, heat.lon));
+    }
+
     const heatmap = new google.maps.visualization.HeatmapLayer({
       data: heatmapData,
       radius: 15

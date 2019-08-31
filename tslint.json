@@ -3,12 +3,12 @@
   "extends": ["angular-tslint-rules", "tslint-config-prettier"],
   "rules": {
     "import-blacklist": [true, "rxjs", "rxjs/Rx", "rxjs/operators"],
-    "trackBy-function": false,
+    "template-use-track-by-function": false,
     "no-unnecessary-class": false,
     "directive-selector": false,
     "component-selector": false,
     "indent": [true, "spaces", 2],
-    "i18n": false,
+    "template-i18n": false,
     "comment-format": [true, "check-space"],
     "no-require-imports": false
   }

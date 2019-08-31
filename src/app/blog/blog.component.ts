@@ -1,13 +1,13 @@
+import { HttpClient } from "@angular/common/http";
 import {
   ChangeDetectionStrategy,
   Component,
   Inject,
   ViewEncapsulation
 } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { BlogDetailComponent } from "./blog-detail.component";
 import { ActivatedRouteSnapshot, Resolve, Router } from "@angular/router";
 import { ViewService } from "../shared/view.service";
+import { BlogDetailComponent } from "./blog-detail.component";
 
 @Component({
   selector: "blog",
@@ -18,8 +18,8 @@ export class BlogComponent {
   private posts: Array<Post>;
 
   constructor(
-    private httpClient: HttpClient,
-    private router: Router,
+    private readonly httpClient: HttpClient,
+    private readonly router: Router,
     public viewService: ViewService
   ) {
     // Show list if the user is coming back to /blog
@@ -31,7 +31,10 @@ export class BlogComponent {
   selectPost(post: Post): void {
     this.viewService.view = false;
     const url = `/blog/${post.title}`.replace(/ /g, "_");
-    this.router.navigate([url]);
+    this.router.navigate([url])
+    .catch((err): void => {
+      console.error(err);
+    });
   }
 }
 

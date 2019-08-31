@@ -5,9 +5,9 @@
     "baseUrl": "./",
     // Set the module format to "commonjs":
     "module": "commonjs",
-    "types": [
-      "node"
-    ]
+    //"types": [
+      //"node"
+    //]
   },
   "exclude": [
     "test.ts",

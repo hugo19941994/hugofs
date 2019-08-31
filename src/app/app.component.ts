@@ -1,8 +1,8 @@
 import { Component } from "@angular/core";
 import { Meta, Title } from "@angular/platform-browser";
-import { ViewService } from "./shared/view.service";
 import { CardComponent } from "./card/card.component";
 import { NavbarComponent } from "./navbar/navbar.component";
+import { ViewService } from "./shared/view.service";
 
 @Component({
   selector: "app-root",
@@ -11,8 +11,8 @@ import { NavbarComponent } from "./navbar/navbar.component";
 })
 export class AppComponent {
   constructor(
-    private meta: Meta,
-    private titleService: Title,
+    private readonly meta: Meta,
+    private readonly titleService: Title,
     public viewService: ViewService
   ) {
     this.meta.addTag({
