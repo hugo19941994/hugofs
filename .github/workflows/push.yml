@@ -1,0 +1,23 @@
+on: push
+name: Deploy
+jobs:
+  master:
+    name: Master
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Master
+      uses: actions/bin/filter@master
+      with:
+        args: branch master
+    - name: Run deploy script
+      uses: maddox/actions/ssh@master
+      env:
+        HOST: ${{ secrets.HOST }}
+        PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+        PUBLIC_KEY: ${{ secrets.PUBLIC_KEY }}
+        USER: ${{ secrets.USER }}
+      with:
+        args: cd /srv/hugofs && git fetch --all && git reset --hard origin/master
+          && npm install && sudo /bin/systemctl restart hugofs.service && sudo /bin/systemctl
+          restart hugofsback.service
