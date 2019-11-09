@@ -67,7 +67,7 @@
     "pre-commit": "^1.2.2",
     "reflect-metadata": "^0.1.13",
     "ts-loader": "^6.2.1",
-    "tslint": "^5.20.0",
+    "tslint": "^5.20.1",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "~3.5.3"
   }
