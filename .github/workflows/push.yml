@@ -1,23 +1,31 @@
-on: push
-name: Deploy
+name: Node CI
+
+on: [push]
+
 jobs:
-  master:
-    name: Master
+  build:
+
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x]
+
     steps:
-    - uses: actions/checkout@master
-    - name: Master
-      uses: actions/bin/filter@master
+    - uses: actions/checkout@v1
+    - name: send custom message with args
+      uses: appleboy/telegram-action@master
       with:
-        args: branch master
-    - name: Run deploy script
-      uses: maddox/actions/ssh@master
+        to: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        args: The ${{ github.event_name }} event triggered first step.
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: npm install, build, and test
+      run: |
+        npm ci
+        npm run lint
       env:
-        HOST: ${{ secrets.HOST }}
-        PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
-        PUBLIC_KEY: ${{ secrets.PUBLIC_KEY }}
-        USER: ${{ secrets.USER }}
-      with:
-        args: cd /srv/hugofs && git fetch --all && git reset --hard origin/master
-          && npm install && sudo /bin/systemctl restart hugofs.service && sudo /bin/systemctl
-          restart hugofsback.service
+        CI: true
