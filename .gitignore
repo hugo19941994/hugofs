@@ -4,18 +4,17 @@
 morgan.log
 
 # Built #
-/__build__/
-/__server_build__/
-/node_modules/
-/typings/
-/tsd_typings/
-/dist/
-/dist-server/
-/compiled/
+__build__/
+__server_build__/
+node_modules/
+typings/
+tsd_typings/
+dist/
+dist-server/
+compiled/
 
 # Node #
-npm-debug.log
-/npm-debug.log.*
+npm-debug.log*
 
 # Webpack #
 webpack.records.json
@@ -28,6 +27,4 @@ webpack.records.json
 *.shim.ngstyle.ts
 
 # Compiled backend
-backend/main.js
-backend/posts.js
-backend/photos.js
+backend/*.js
