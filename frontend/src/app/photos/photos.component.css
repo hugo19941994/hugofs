@@ -42,3 +42,8 @@
 .home-map-internal {
   padding: 24px;
 }
+
+.collection-title {
+  text-align: center;
+  color: #fff;
+}
