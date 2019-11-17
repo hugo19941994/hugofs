@@ -12,6 +12,10 @@ const bucket = storage.bucket('photos-hugofs');
 const images: { [s: string]: Images } = {};
 export let photo_router = Router();
 
+let FINISHED = false;
+
+prepare_photos()
+
 // Single image
 class Image {
   // Photo name
@@ -96,7 +100,7 @@ async function fillMetadata(collection, files) {
   images[collection].location = { lat, lon };
 }
 
-export async function prepare_photos() {
+async function prepare_photos() {
   const [allFiles] = await bucket.getFiles();
 
   const collections: any = {};
@@ -109,19 +113,23 @@ export async function prepare_photos() {
   }
 
   for (const collection of Object.keys(collections)) {
-    //console.log(collection)
-    //console.log(collections[collection])
     images[collection] = new Images();
     await Promise.all([
       fillMetadata(collection, collections[collection]),
       fillImages(collection, collections[collection])
     ]);
-
   }
+
+  // Lloading finished, can now serve the API
+  FINISHED = true;
 }
 
 // Send metadata
-photo_router.get("/api/photos", (req, res, next) => {
+photo_router.get("/api/photos", async (req, res, next) => {
+  while (!FINISHED) {
+    await timeout(1000);
+  }
+
   let r: object[] = [];
 
   for (const folder in images) {
@@ -137,7 +145,11 @@ photo_router.get("/api/photos", (req, res, next) => {
 });
 
 // Send a web/progressive JPG thumbnail
-photo_router.get("/api/photo/:folder/:id", (req, res, next) => {
+photo_router.get("/api/photo/:folder/:id", async (req, res, next) => {
+  while (!FINISHED) {
+    await timeout(1000);
+  }
+
   // Image path
   const img: Image = images[req.params.folder]["images"][req.params.id];
 
@@ -153,6 +165,10 @@ photo_router.get("/api/photo/:folder/:id", (req, res, next) => {
 
 // Send original photo
 photo_router.get("/api/photo-original/:folder/:id", async (req, res, next) => {
+  while (!FINISHED) {
+    await timeout(1000);
+  }
+
   const img: Image = images[req.params.folder]["images"][req.params.id];
 
   const url = await img.file.getSignedUrl({
@@ -161,3 +177,7 @@ photo_router.get("/api/photo-original/:folder/:id", async (req, res, next) => {
   });
   res.redirect(url)
 });
+
+function timeout(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
