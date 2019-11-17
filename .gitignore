@@ -28,6 +28,6 @@ webpack.records.json
 *.shim.ngstyle.ts
 
 # Compiled backend
-main.js
-posts.js
-photos.js
+backend/main.js
+backend/posts.js
+backend/photos.js

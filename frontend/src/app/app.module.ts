@@ -10,6 +10,7 @@ import { HomeComponent } from "./home/home.component";
 
 import { BlogDetailComponent } from "./blog/blog-detail.component";
 import { BlogComponent } from "./blog/blog.component";
+import { DisqusComponent } from "./blog/disqus.component";
 import { CardComponent } from "./card/card.component";
 import { NavbarComponent } from "./navbar/navbar.component";
 import { PhotosComponent } from "./photos/photos.component";
@@ -22,6 +23,7 @@ import { ViewService } from "./shared/view.service";
     HomeComponent,
     ProjectsComponent,
     BlogComponent,
+    DisqusComponent,
     BlogDetailComponent,
     PhotosComponent,
     CardComponent,

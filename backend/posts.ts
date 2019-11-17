@@ -13,6 +13,7 @@ try {
 }
 
 // Highlighting options
+// TODO: Sanitize HTML
 marked.setOptions({
   highlight: code => {
     return (
@@ -20,8 +21,7 @@ marked.setOptions({
       require("highlight.js").highlightAuto(code).value +
       "</code></pre>"
     );
-  },
-  sanitize: true
+  }
 });
 
 async function prepare_posts() {

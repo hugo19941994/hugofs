@@ -7,17 +7,24 @@
 ## Run
 
 ```bash
+cd frontend
+
 npm install
 npm run build:ssr && npm run serve:ssr
+```
 
-# In another shell
-npm run backend
+```bash
+cd backend
+
+npm install
+npm run compile && npm run start
 ```
 
 ## Comments
 
-To use comments run an instance of [isso](https://github.com/posativ/isso).
+To use comments configure an account in [Disqus](https://disqus.com/) and change the shortname in `./frontend/src/app/blog/disqus.component.ts`
 
 ## Google Maps
 
-Substitute API key in index.html
+Substitute API key in `./frontend/src/index.html`
+

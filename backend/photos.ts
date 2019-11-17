@@ -1,21 +1,28 @@
 const { readdir, readFile, lstat } = require("fs").promises;
 const sharp = require("sharp");
-import { extname } from "path";
 import { Router } from "express";
+import { extname } from "path";
 const ExifImage = require("exif").ExifImage;
+const getRawBody = require('raw-body')
 
-let images: { [s: string]: Images } = {};
+const { Storage, File } = require('@google-cloud/storage');
+const storage = new Storage();
+const bucket = storage.bucket('photos-hugofs');
+
+const images: { [s: string]: Images } = {};
 export let photo_router = Router();
-prepare_photos();
 
 // Single image
 class Image {
   // Photo name
-  name: string = "";
+  name = "";
 
   // Thumbnails
   webp: any;
   jpgp: any;
+
+  // Original file
+  file: typeof File;
 }
 
 // Image collection
@@ -24,32 +31,29 @@ class Images {
   images: { [s: string]: Image } = {};
 
   // Location of heatmaps
-  heatmap: any[] = [];
+  heatmap: Array<any> = [];
 
   // Center of map
   location: Object = "";
 
   // Collection name
-  folder: string = "";
+  folder = "";
 }
 
-async function fillImages(dir, folder) {
-  // All jpg files
-  const img_in_folder: string[] = (await readdir(`${dir}${folder}`)).filter(
-    f => extname(f).toLowerCase() === ".jpg"
-  );
-
-  for (const img_name of img_in_folder) {
-    let image = new Image();
+async function fillImages(collection, files) {
+  for (const file of files) {
+    const image = new Image();
+    const buffer = await getRawBody(file.createReadStream());
 
     // Resize image
-    const img_resized = sharp(`${dir}${folder}/${img_name}`).resize(500);
+    const img_resized = sharp(buffer).resize(500);
 
-    image.name = img_name;
+    image.name = file.name.split('/')[1];
     image.webp = await img_resized.webp().toBuffer();
     image.jpgp = await img_resized.jpeg({ progressive: true }).toBuffer();
+    image.file = file;
 
-    images[folder].images[image.name] = image;
+    images[collection].images[image.name] = image;
   }
 }
 
@@ -57,26 +61,23 @@ function sumGeo(geoArr) {
   return geoArr[0] + geoArr[1] / 60 + geoArr[2] / 3600;
 }
 
-async function getEXIF(filePath) {
+async function getEXIF(file) {
+  const buffer = await getRawBody(file.createReadStream());
+
   return new Promise((resolve, reject) => {
-    ExifImage(filePath, (err, data) => {
-      if (err) reject(err.message);
-      else resolve(data);
+    ExifImage(buffer, (err, data) => {
+      if (err) { reject(err.message); }
+      else { resolve(data); }
     });
   });
 }
 
-async function fillMetadata(dir, folder) {
-  // All jpg files
-  const img_in_folder: string[] = (await readdir(`${dir}${folder}`)).filter(
-    f => extname(f).toLowerCase() === ".jpg"
-  );
-
+async function fillMetadata(collection, files) {
   // Extract GPS coords from exif
-  for (const img_name of img_in_folder) {
-    const exifData: any = await getEXIF(`${dir}${folder}/${img_name}`);
+  for (const file of files) {
+    const exifData: any = await getEXIF(file);
     if (exifData.gps.GPSLatitude !== undefined) {
-      images[folder].heatmap.push({
+      images[collection].heatmap.push({
         lat: sumGeo(exifData.gps.GPSLatitude),
         lon: sumGeo(exifData.gps.GPSLongitude)
       });
@@ -85,29 +86,37 @@ async function fillMetadata(dir, folder) {
 
   // latitude and longitude average (simple average because locations are near each other)
   // TODO: More accurate average which takes into account curvature of earth?
-  let lon =
-    images[folder].heatmap.reduce((a, b) => a + b.lon, 0) /
-    images[folder].heatmap.length;
-  let lat =
-    images[folder].heatmap.reduce((a, b) => a + b.lat, 0) /
-    images[folder].heatmap.length;
+  const lon =
+    images[collection].heatmap.reduce((a, b) => a + b.lon, 0) /
+    images[collection].heatmap.length;
+  const lat =
+    images[collection].heatmap.reduce((a, b) => a + b.lat, 0) /
+    images[collection].heatmap.length;
 
-  images[folder].location = { lat, lon };
+  images[collection].location = { lat, lon };
 }
 
 export async function prepare_photos() {
-  const dir = `${__dirname}/photos/`;
-  const folders = await readdir(dir);
+  const [allFiles] = await bucket.getFiles();
 
-  for (let folder of folders) {
-    // Filter non folders
-    const stats = await lstat(`${dir}${folder}`);
-    if (!stats.isDirectory()) {
-      continue;
+  const collections: any = {};
+  for (const file of allFiles) {
+    const [folder] = file.metadata.name.split('/')
+    if (!collections[folder]) {
+      collections[folder] = [];
     }
+    collections[folder].push(file);
+  }
 
-    images[folder] = new Images();
-    Promise.all([fillMetadata(dir, folder), fillImages(dir, folder)]);
+  for (const collection of Object.keys(collections)) {
+    //console.log(collection)
+    //console.log(collections[collection])
+    images[collection] = new Images();
+    await Promise.all([
+      fillMetadata(collection, collections[collection]),
+      fillImages(collection, collections[collection])
+    ]);
+
   }
 }
 
@@ -143,6 +152,12 @@ photo_router.get("/api/photo/:folder/:id", (req, res, next) => {
 });
 
 // Send original photo
-photo_router.get("/api/photo-original/:folder/:id", (req, res, next) => {
-  res.sendFile(`${__dirname}/photos/${req.params.folder}/${req.params.id}`);
+photo_router.get("/api/photo-original/:folder/:id", async (req, res, next) => {
+  const img: Image = images[req.params.folder]["images"][req.params.id];
+
+  const url = await img.file.getSignedUrl({
+    action: 'read',
+    expires: Date.now() + 3600000
+  });
+  res.redirect(url)
 });

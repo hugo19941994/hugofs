@@ -20,13 +20,15 @@
     "backend": "tsc -p backend/tsconfig.backend.json && node main.js",
     "tsc": "tsc",
     "ng": "ng",
-    "start": "ng serve",
+    "start:old": "ng serve",
     "build": "ng build",
     "lint": "ng lint",
     "build:client-and-server-bundles": "ng build --prod && ng run hugofs:server",
     "build:ssr": "npm run build:client-and-server-bundles && npm run webpack:server",
     "webpack:server": "webpack --config webpack.server.config.js --progress --colors",
-    "serve:ssr": "node dist/server"
+    "serve:ssr": "node dist/server",
+    "deploy": "ng build --prod && npm run build:ssr && gcloud app deploy",
+    "start": "node dist/server"
   },
   "private": false,
   "dependencies": {

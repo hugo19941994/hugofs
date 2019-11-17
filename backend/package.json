@@ -1,0 +1,50 @@
+{
+  "name": "hugofs-backend",
+  "version": "1.0.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hugo19941994/hugofs.git"
+  },
+  "author": "Hugo Ferrando Seage <me@hugofs.com> (https://hugofs.com)",
+  "description": "My personal website's backend",
+  "homepage": "https://hugofs.com",
+  "bugs": {
+    "url": "https://github.com/hugo19941994/hugofs/issues",
+    "email": "me@hugofs.com"
+  },
+  "pre-commit": [
+    "lint"
+  ],
+  "scripts": {
+    "deploy": "tsc -p tsconfig.backend.json && gcloud app deploy",
+    "compile": "tsc -p tsconfig.backend.json",
+    "start": "node main.js"
+  },
+  "private": false,
+  "dependencies": {
+    "@google-cloud/storage": "^4.1.2",
+    "@types/node": "^12.12.8",
+    "compression": "^1.7.4",
+    "exif": "^0.6.0",
+    "express": "^4.17.1",
+    "highlight.js": "^9.16.2",
+    "marked": "^0.7.0",
+    "raw-body": "^2.4.1",
+    "rxjs": "^6.5.3",
+    "sharp": "^0.23.2",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "zone.js": "~0.9.1"
+  },
+  "devDependencies": {
+    "codelyzer": "^5.2.0",
+    "cpy-cli": "^2.0.0",
+    "pre-commit": "^1.2.2",
+    "reflect-metadata": "^0.1.13",
+    "ts-loader": "^6.2.1",
+    "tslint": "^5.20.1",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "~3.5.3"
+  }
+}

@@ -6,6 +6,7 @@
 
       <div class="photos">
         <div class="wrapper">
+          <p>{{set.folder}}</p>
           <div class="photo" *ngFor="let photo of set.images">
             <a href="/api/photo-original/{{set.folder}}/{{photo}}"><img src="/api/photo/{{set.folder}}/{{photo}}"/></a>
           </div>
