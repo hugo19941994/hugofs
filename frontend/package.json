@@ -51,7 +51,7 @@
     "highlight.js": "^9.16.2",
     "marked": "^0.7.0",
     "rxjs": "^6.5.3",
-    "sharp": "^0.23.2",
+    "sharp": "^0.23.3",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
     "zone.js": "~0.9.1"
