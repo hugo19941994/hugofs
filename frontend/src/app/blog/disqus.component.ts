@@ -21,7 +21,7 @@ export class DisqusComponent implements AfterViewInit {
   };
   language = "";
 
-    constructor(private el:ElementRef, private renderer:Renderer2, @Inject(DOCUMENT) private document: Document, private router: Router) {}
+    constructor(private readonly el:ElementRef, private readonly renderer:Renderer2, @Inject(DOCUMENT) private readonly document: Document, private readonly router: Router) {}
 
     ngAfterViewInit(): void {
       if ((window as any).DISQUS === undefined) {
