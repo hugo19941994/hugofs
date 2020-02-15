@@ -34,7 +34,7 @@
     "rxjs": "^6.5.4",
     "sharp": "^0.24.0",
     "webpack": "^4.41.6",
-    "webpack-cli": "^3.3.10",
+    "webpack-cli": "^3.3.11",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
