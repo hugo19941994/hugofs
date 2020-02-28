@@ -24,7 +24,7 @@
   "private": false,
   "dependencies": {
     "@google-cloud/storage": "^4.3.1",
-    "@types/node": "^13.7.4",
+    "@types/node": "^13.7.6",
     "compression": "^1.7.4",
     "exif": "^0.6.0",
     "express": "^4.17.1",
