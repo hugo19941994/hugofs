@@ -62,7 +62,7 @@
     "@angular/compiler-cli": "^8.2.4",
     "@angular/language-service": "^9.0.7",
     "@types/node": "^13.9.5",
-    "codelyzer": "^5.2.1",
+    "codelyzer": "^5.2.2",
     "compression": "^1.7.4",
     "cpy-cli": "^3.1.0",
     "express": "^4.17.1",
