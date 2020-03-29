@@ -60,7 +60,7 @@
     "@angular-devkit/build-angular": "~0.803.25",
     "@angular/cli": "^9.1.0",
     "@angular/compiler-cli": "^8.2.4",
-    "@angular/language-service": "^9.0.7",
+    "@angular/language-service": "^9.1.0",
     "@types/node": "^13.9.5",
     "codelyzer": "^5.2.2",
     "compression": "^1.7.4",
