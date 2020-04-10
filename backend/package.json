@@ -31,7 +31,7 @@
     "highlight.js": "^9.18.1",
     "marked": "^0.8.2",
     "raw-body": "^2.4.1",
-    "rxjs": "^6.5.4",
+    "rxjs": "^6.5.5",
     "sharp": "^0.25.2",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
