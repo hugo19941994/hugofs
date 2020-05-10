@@ -1,23 +1,23 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient } from '@angular/common/http';
 import {
   ChangeDetectionStrategy,
   Component,
   Inject,
   ViewEncapsulation
-} from "@angular/core";
-import { ActivatedRoute, Event, NavigationEnd, Router } from "@angular/router";
-import { ViewService } from "../shared/view.service";
-import { DisqusComponent } from "./disqus.component";
+} from '@angular/core';
+import { ActivatedRoute, Event, NavigationEnd, Router } from '@angular/router';
+import { ViewService } from '../shared/view.service';
+import { DisqusComponent } from './disqus.component';
 
 @Component({
-  selector: "blog-detail",
-  styleUrls: ["./blog-detail.component.css"],
-  templateUrl: "./blog-detail.component.html",
+  selector: 'app-blog-detail',
+  styleUrls: ['./blog-detail.component.css'],
+  templateUrl: './blog-detail.component.html',
   // tslint:disable-next-line
   encapsulation: ViewEncapsulation.None // Used to center images
 })
 export class BlogDetailComponent {
-  post: Post = {"title": "", "date": "", "text": ""};
+  post: Post = {title: '', date: '', text: ''};
   loadAPI: Promise<any>;
 
   constructor(
@@ -32,10 +32,10 @@ export class BlogDetailComponent {
 
     router.events.subscribe((val: Event) => {
       if (val instanceof NavigationEnd) {
-        if (val.url.match("/blog/")) { viewService.view = false };
+        if (val.url.match('/blog/')) { viewService.view = false; }
       } else {
-        viewService.view = true
-      };
+        viewService.view = true;
+      }
     });
   }
 
@@ -48,7 +48,7 @@ export class BlogDetailComponent {
   }
 
   back(): void {
-    this.router.navigate(["../"], { relativeTo: this.route })
+    this.router.navigate(['../'], { relativeTo: this.route })
     .catch((err): void => {
       console.error(err);
     });

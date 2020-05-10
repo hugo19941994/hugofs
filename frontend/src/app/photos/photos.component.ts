@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient } from '@angular/common/http';
 import {
   AfterViewInit,
   Component,
@@ -6,22 +6,24 @@ import {
   QueryList,
   Renderer2,
   ViewChildren
-} from "@angular/core";
-const mapStyle = require("./map_style.json");
+} from '@angular/core';
+import * as mapStyle from './map_style.json';
+
+declare var google: any;
 
 @Component({
-  selector: "photos",
-  styleUrls: ["./photos.component.css"],
-  templateUrl: "./photos.component.html"
+  selector: 'app-photos',
+  styleUrls: ['./photos.component.css'],
+  templateUrl: './photos.component.html'
 })
 export class PhotosComponent implements AfterViewInit {
   photos = [];
 
   // Load maps after the photo div has finished rendering
-  @ViewChildren("photo") photoDiv: QueryList<any>;
+  @ViewChildren('photo') photoDiv: QueryList<any>;
   ngAfterViewInit(): void {
     this.photoDiv.changes.subscribe(() => {
-      for (const collection of this.photos) { this.prepareMap(collection) };
+      for (const collection of this.photos) { this.prepareMap(collection); }
     });
   }
 
@@ -29,7 +31,7 @@ export class PhotosComponent implements AfterViewInit {
   constructor(private readonly httpClient: HttpClient, private readonly renderer: Renderer2) {
     // Load photo data
     this.httpClient
-      .get<Array<any>>("/api/photos/")
+      .get<Array<any>>('/api/photos/')
       .subscribe(res => (this.photos = res));
   }
 
@@ -39,19 +41,19 @@ export class PhotosComponent implements AfterViewInit {
       center: new google.maps.LatLng(collection.loc.lat, collection.loc.lon),
       zoom: 5, // TODO: Use bounds to calculate zoom
       mapTypeId: google.maps.MapTypeId.ROADMAP,
-      gestureHandling: "none" as any,
+      gestureHandling: 'none' as any,
       zoomControl: false,
       disableDefaultUI: true,
-      backgroundColor: "#202020",
-      draggableCursor: "default"
+      backgroundColor: '#202020',
+      draggableCursor: 'default'
     };
     const styledMapType = new google.maps.StyledMapType(mapStyle, {
-      name: "Styled Map"
+      name: 'Styled Map'
     });
     const gmapElement = document.getElementById(`gmap${collection.folder}`);
     const map = new google.maps.Map(gmapElement, mapProp);
-    map.mapTypes.set("styled_map", styledMapType);
-    map.setMapTypeId("styled_map");
+    map.mapTypes.set('styled_map', styledMapType);
+    map.setMapTypeId('styled_map');
 
     const heatmapData = [];
     for (const heat of collection.heatmap) {

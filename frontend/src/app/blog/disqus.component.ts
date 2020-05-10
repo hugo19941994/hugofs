@@ -4,24 +4,25 @@ import { Router } from '@angular/router';
 
 interface Page {
   url: string;
-  identifier: string
+  identifier: string;
 }
 
 @Component({
-    selector: 'disqus',
+    selector: 'app-disqus',
     template: '<div id="disqus_thread"></div>',
 })
 export class DisqusComponent implements AfterViewInit {
 
-  @Input() identifier:string;
-  shortname = "hugofs-com";
+  @Input() identifier: string;
+  shortname = 'hugofs-com';
   page: Page = {
-    url: "",
-    identifier: ""
+    url: '',
+    identifier: ''
   };
-  language = "";
+  language = '';
 
-    constructor(private readonly el:ElementRef, private readonly renderer:Renderer2, @Inject(DOCUMENT) private readonly document: Document, private readonly router: Router) {}
+    constructor(private readonly el: ElementRef, private readonly renderer: Renderer2,
+                @Inject(DOCUMENT) private readonly document: Document, private readonly router: Router) {}
 
     ngAfterViewInit(): void {
       if ((window as any).DISQUS === undefined) {
@@ -48,19 +49,19 @@ export class DisqusComponent implements AfterViewInit {
     addScriptTag(): void{
        (window as any).disqus_config = this.getConfig();
 
-       const script = this.document.createElement('script')
+       const script = this.document.createElement('script');
        script.src = `//${this.shortname}.disqus.com/embed.js`;
        script.async = true;
        script.type = 'text/javascript';
        script.setAttribute('data-timestamp', new Date().getTime().toString());
-      this.el.nativeElement.appendChild(script);
+       this.el.nativeElement.appendChild(script);
 
      }
 
     /**
      * Get Disqus config
      */
-    getConfig(): Function {
+    getConfig(): () => void {
       return () => {
         this.page.url = this.router.url;
         this.page.identifier = this.identifier;

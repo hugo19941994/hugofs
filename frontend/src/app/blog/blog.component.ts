@@ -1,21 +1,21 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient } from '@angular/common/http';
 import {
   ChangeDetectionStrategy,
   Component,
   Inject,
   ViewEncapsulation
-} from "@angular/core";
-import { ActivatedRouteSnapshot, Resolve, Router } from "@angular/router";
-import { ViewService } from "../shared/view.service";
-import { BlogDetailComponent } from "./blog-detail.component";
+} from '@angular/core';
+import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
+import { ViewService } from '../shared/view.service';
+import { BlogDetailComponent } from './blog-detail.component';
 
 @Component({
-  selector: "blog",
-  styleUrls: ["./blog.component.css"],
-  templateUrl: "./blog.component.html"
+  selector: 'app-blog',
+  styleUrls: ['./blog.component.css'],
+  templateUrl: './blog.component.html'
 })
 export class BlogComponent {
-  private posts: Array<Post>;
+  public posts: Array<Post>;
 
   constructor(
     private readonly httpClient: HttpClient,
@@ -23,14 +23,14 @@ export class BlogComponent {
     public viewService: ViewService
   ) {
     // Show list if the user is coming back to /blog
-    this.httpClient.get<Array<Post>>("/api/posts").subscribe(data => {
+    this.httpClient.get<Array<Post>>('/api/posts').subscribe(data => {
       this.posts = data;
     });
   }
 
   selectPost(post: Post): void {
     this.viewService.view = false;
-    const url = `/blog/${post.title}`.replace(/ /g, "_");
+    const url = `/blog/${post.title}`.replace(/ /g, '_');
     this.router.navigate([url])
     .catch((err): void => {
       console.error(err);
