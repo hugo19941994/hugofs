@@ -23,7 +23,7 @@
   },
   "private": false,
   "dependencies": {
-    "@google-cloud/storage": "^4.7.0",
+    "@google-cloud/storage": "^5.0.0",
     "@types/node": "^13.13.5",
     "compression": "^1.7.4",
     "exif": "^0.6.0",
