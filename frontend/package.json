@@ -41,7 +41,7 @@
     "@nguniversal/express-engine": "^9.1.1",
     "@types/googlemaps": "^3.39.4",
     "express": "^4.15.2",
-    "highlight.js": "^10.0.2",
+    "highlight.js": "^10.0.3",
     "marked": "^1.1.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.13.0",
