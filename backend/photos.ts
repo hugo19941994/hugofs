@@ -3,7 +3,7 @@ import sharp from "sharp";
 import { Router } from "express";
 import { extname } from "path";
 import ExifImage from "exif";
-import * as getRawBody from 'raw-body';
+import getRawBody from 'raw-body';
 
 import { Storage, File } from '@google-cloud/storage';
 const storage = new Storage();

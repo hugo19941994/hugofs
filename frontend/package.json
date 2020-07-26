@@ -25,7 +25,6 @@
     "serve:ssr": "node dist/hugofs/server/main.js",
     "build:ssr": "ng build --prod && ng run hugofs:server:production",
     "prerender": "ng run hugofs:prerender",
-    "deploy": "ng build --prod && npm run build:ssr && gcloud app deploy",
     "postinstall": "ngcc"
   },
   "private": false,
