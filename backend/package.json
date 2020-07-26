@@ -36,11 +36,9 @@
   },
   "devDependencies": {
     "@types/node": "^14.0.26",
-    "codelyzer": "^6.0.0",
     "cpy-cli": "^3.1.1",
     "pre-commit": "^1.2.2",
     "reflect-metadata": "^0.1.13",
-    "ts-loader": "^7.0.5",
     "tslint": "^6.1.2",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "~3.9.7"
