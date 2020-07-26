@@ -1,0 +1,17 @@
+ apiVersion: networking.k8s.io/v1beta1 # for versions before 1.14 use extensions/v1beta1
+ kind: Ingress
+ metadata:
+   name: example-ingress
+ spec:
+   rules:
+   - host: hugofs-test.com
+     http:
+       paths:
+       - path: /
+         backend:
+           serviceName: hugofs-frontend
+           servicePort: 4000
+       - path: /api/
+         backend:
+           serviceName: hugofs-backend
+           servicePort: 3060
