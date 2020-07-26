@@ -1,15 +1,16 @@
-const { readdir, readFile } = require("fs").promises;
-const marked = require("marked");
+import { readdir, readFile } from "fs/promises";
+import marked from "marked";
 import { Router } from "express";
+import { stderr, exit } from "process";
 
-export let post_router = Router();
-let posts = {};
+export let postRouter = Router();
+const posts = {};
 
 try {
   prepare_posts();
 } catch (err) {
-  console.log(err);
-  process.exit(1);
+  stderr.write(`${err}\n`);
+  exit(1);
 }
 
 // Highlighting options
@@ -31,21 +32,23 @@ async function prepare_posts() {
   for (const folder of folders) {
     // TODO: Make parallel
     const data = await readFile(`${dir}${folder}/data.json`, "utf8");
-    let post_data = JSON.parse(data);
+    const postData = JSON.parse(data);
 
     const post = await readFile(`${dir}${folder}/post.md`, "utf8");
     marked(post, (err, content) => {
-      post_data["text"] = content;
-      posts[post_data.title.replace(/ /g, "_")] = post_data;
+      postData.text = content;
+      posts[postData.title.replace(/ /g, "_")] = postData;
     });
   }
 }
 
-post_router.get("/api/posts", (req, res, next) => {
-  let r = [];
+postRouter.get("/api/posts", (req, res, next) => {
+  const reply = [];
 
-  for (let post in posts) {
-    r.push({ title: posts[post].title, date: posts[post].date });
+  for (const post in posts) {
+    if (posts.hasOwnProperty(post)) {
+      reply.push({ title: posts[post].title, date: posts[post].date });
+    }
   }
 
   function compare(a, b) {
@@ -54,10 +57,10 @@ post_router.get("/api/posts", (req, res, next) => {
     return 0;
   }
 
-  res.json(r.sort(compare));
+  res.json(reply.sort(compare));
 });
 
-post_router.get("/api/post/:post_id", (req, res, next) => {
+postRouter.get("/api/post/:post_id", (req, res, next) => {
   if (req.params.post_id in posts) {
     res.json(posts[req.params.post_id]);
   } else {
