@@ -1,4 +1,0 @@
-service: back
-runtime: nodejs12
-instance_class: F2
-

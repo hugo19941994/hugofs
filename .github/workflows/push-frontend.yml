@@ -1,0 +1,50 @@
+name: Frontend Deployment
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Send Telegram message
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        args: Attempting deployment of frontend ${{ github.event_name }}.
+
+    - name: Build and push Frotnend image
+      uses: docker/build-push-action@v1
+      with:
+        username: hugo19941994
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        repository: hugo19941994/hugofs-frontend
+        tags: latest
+        path: frontend
+
+    - name: Install doctl
+      uses: digitalocean/action-doctl@v2
+      with:
+        token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+    - name: Save DigitalOcean kubeconfig
+      run: doctl kubernetes cluster kubeconfig save k8s-1-18-6-do-0-lon1-1595756233547
+
+    - name: Deploy to DigitalOcean Kubernetes
+      run: kubectl apply -f manifest.yaml
+
+    - name: Deploy to DigitalOcean Kubernetes
+      run: kubectl apply -f example-ingress.yaml
+
+    - name: Deploy to DigitalOcean Kubernetes
+      run: kubectl rollout restart deployment/hugofs-frontend
+
+    - name: Verify deployment
+      run: kubectl rollout status deployment/hugofs-frontend

@@ -19,7 +19,8 @@
   "scripts": {
     "deploy": "tsc -p tsconfig.backend.json && gcloud app deploy",
     "compile": "tsc -p tsconfig.backend.json",
-    "start": "node main.js"
+    "start": "node main.js",
+    "lint": "tslint *.ts"
   },
   "private": false,
   "dependencies": {
