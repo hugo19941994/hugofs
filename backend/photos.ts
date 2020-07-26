@@ -1,48 +1,24 @@
-const { readdir, readFile, lstat } = require("fs").promises;
-const sharp = require("sharp");
+import { readdir, readFile, lstat } from "fs/promises";
+import sharp from "sharp";
 import { Router } from "express";
 import { extname } from "path";
-const ExifImage = require("exif").ExifImage;
-const getRawBody = require('raw-body')
+import ExifImage from "exif";
+import * as getRawBody from 'raw-body';
 
-const { Storage, File } = require('@google-cloud/storage');
+import { Storage, File } from '@google-cloud/storage';
 const storage = new Storage();
 const bucket = storage.bucket('photos-hugofs');
 
+import Image from './image';
+import Images from './images';
+
 const images: { [s: string]: Images } = {};
-export let photo_router = Router();
+export let photoRouter = Router();
 
 let FINISHED = false;
 
 prepare_photos()
 
-// Single image
-class Image {
-  // Photo name
-  name = "";
-
-  // Thumbnails
-  webp: any;
-  jpgp: any;
-
-  // Original file
-  file: typeof File;
-}
-
-// Image collection
-class Images {
-  // List of images
-  images: { [s: string]: Image } = {};
-
-  // Location of heatmaps
-  heatmap: Array<any> = [];
-
-  // Center of map
-  location: Object = "";
-
-  // Collection name
-  folder = "";
-}
 
 async function fillImages(collection, files) {
   for (const file of files) {
@@ -50,11 +26,11 @@ async function fillImages(collection, files) {
     const buffer = await getRawBody(file.createReadStream());
 
     // Resize image
-    const img_resized = sharp(buffer).resize(500);
+    const imgResized = sharp(buffer).resize(500);
 
     image.name = file.name.split('/')[1];
-    image.webp = await img_resized.webp().toBuffer();
-    image.jpgp = await img_resized.jpeg({ progressive: true }).toBuffer();
+    image.webp = await imgResized.webp().toBuffer();
+    image.jpgp = await imgResized.jpeg({ progressive: true }).toBuffer();
     image.file = file;
 
     images[collection].images[image.name] = image;
@@ -125,33 +101,35 @@ async function prepare_photos() {
 }
 
 // Send metadata
-photo_router.get("/api/photos", async (req, res, next) => {
+photoRouter.get("/api/photos", async (req, res, next) => {
   while (!FINISHED) {
     await timeout(1000);
   }
 
-  let r: object[] = [];
+  const reply: object[] = [];
 
   for (const folder in images) {
-    r.push({
-      folder: folder,
-      heatmap: images[folder]["heatmap"],
-      images: Object.keys(images[folder]["images"]),
-      loc: images[folder]["location"]
-    });
+    if (images.hasOwnProperty(folder)) {
+      reply.push({
+        folder,
+        heatmap: images[folder].heatmap,
+        images: Object.keys(images[folder].images),
+        loc: images[folder].location
+      });
+    }
   }
 
-  res.json(r);
+  res.json(reply);
 });
 
 // Send a web/progressive JPG thumbnail
-photo_router.get("/api/photo/:folder/:id", async (req, res, next) => {
+photoRouter.get("/api/photo/:folder/:id", async (req, res, next) => {
   while (!FINISHED) {
     await timeout(1000);
   }
 
   // Image path
-  const img: Image = images[req.params.folder]["images"][req.params.id];
+  const img: Image = images[req.params.folder].images[req.params.id];
 
   // Send webp or progressive JPEG, depening on browser support
   if (req.get("accept").indexOf("image/webp") > -1) {
@@ -164,18 +142,14 @@ photo_router.get("/api/photo/:folder/:id", async (req, res, next) => {
 });
 
 // Send original photo
-photo_router.get("/api/photo-original/:folder/:id", async (req, res, next) => {
+photoRouter.get("/api/photo-original/:folder/:id", async (req, res, next) => {
   while (!FINISHED) {
     await timeout(1000);
   }
 
-  const img: Image = images[req.params.folder]["images"][req.params.id];
+  const img: Image = images[req.params.folder].images[req.params.id];
 
-  const url = await img.file.getSignedUrl({
-    action: 'read',
-    expires: Date.now() + 3600000
-  });
-  res.redirect(url)
+  const url = img.file.createReadStream().pipe(res);
 });
 
 function timeout(ms) {

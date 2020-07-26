@@ -22,6 +22,6 @@ jobs:
     - name: npm install, build, and test backend
       run: |
         npm --prefix backend ci
-        #npm --prefix backend run lint
+        npm --prefix backend run lint
       env:
         CI: true
