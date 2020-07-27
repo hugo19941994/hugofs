@@ -1,8 +1,8 @@
 # HugoFS website
 
-[![Dependency Status](https://david-dm.org/hugo19941994/hugofs.svg)](https://david-dm.org/hugo19941994/hugofs)
-[![devDependency Status](https://david-dm.org/hugo19941994/hugofs/dev-status.svg)](https://david-dm.org/hugo19941994/hugofs?type=dev)
-[![Build Status](https://travis-ci.com/hugo19941994/hugofs.svg?branch=master)](https://travis-ci.com/hugo19941994/hugofs)
+| ![Frontend CI](https://github.com/hugo19941994/hugofs/workflows/Frontend%20CI/badge.svg) | ![Frontend Deployment](https://github.com/hugo19941994/hugofs/workflows/Frontend%20Deployment/badge.svg) |
+| --- | --- |
+| ![Backend CI](https://github.com/hugo19941994/hugofs/workflows/Backend%20CI/badge.svg) | ![Backend Deployment](https://github.com/hugo19941994/hugofs/workflows/Backend%20Deployment/badge.svg) |
 
 ## Run
 
