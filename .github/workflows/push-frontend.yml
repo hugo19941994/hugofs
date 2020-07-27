@@ -41,6 +41,9 @@ jobs:
       run: kubectl apply -f manifest.yaml
 
     - name: Deploy to DigitalOcean Kubernetes
+      run: kubectl apply -f issuer.yaml
+
+    - name: Deploy to DigitalOcean Kubernetes
       run: kubectl apply -f ingress.yaml
 
     - name: Deploy to DigitalOcean Kubernetes
