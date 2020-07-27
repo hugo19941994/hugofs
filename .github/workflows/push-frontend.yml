@@ -41,7 +41,7 @@ jobs:
       run: kubectl apply -f manifest.yaml
 
     - name: Deploy to DigitalOcean Kubernetes
-      run: kubectl apply -f example-ingress.yaml
+      run: kubectl apply -f ingress.yaml
 
     - name: Deploy to DigitalOcean Kubernetes
       run: kubectl rollout restart deployment/hugofs-frontend
