@@ -5,8 +5,10 @@
     "types": [
       "node"
     ],
-    "resolveJsonModule": true
-  ,    "target": "es2016"
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "target": "es2016"
 },
   "files": [
     "src/main.server.ts",

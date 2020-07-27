@@ -7,7 +7,7 @@ import {
   Renderer2,
   ViewChildren
 } from '@angular/core';
-import * as mapStyle from './map_style.json';
+import mapStyle from './map_style.json';
 
 declare var google: any;
 
