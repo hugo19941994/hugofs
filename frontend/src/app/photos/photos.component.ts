@@ -7,7 +7,7 @@ import {
   Renderer2,
   ViewChildren
 } from '@angular/core';
-import * as mapStyle from './map_style.json';
+import mapStyle from './map_style.json';
 
 declare var google: any;
 
@@ -31,7 +31,7 @@ export class PhotosComponent implements AfterViewInit {
   constructor(private readonly httpClient: HttpClient, private readonly renderer: Renderer2) {
     // Load photo data
     this.httpClient
-      .get<Array<any>>('/api/photos/')
+      .get<Array<any>>('http://localhost:3060/api/photos/')
       .subscribe(res => (this.photos = res));
   }
 
