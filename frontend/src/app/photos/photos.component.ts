@@ -31,7 +31,7 @@ export class PhotosComponent implements AfterViewInit {
   constructor(private readonly httpClient: HttpClient, private readonly renderer: Renderer2) {
     // Load photo data
     this.httpClient
-      .get<Array<any>>('http://localhost:3060/api/photos/')
+      .get<Array<any>>('/api/photos/')
       .subscribe(res => (this.photos = res));
   }
 
