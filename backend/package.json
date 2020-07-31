@@ -30,7 +30,7 @@
     "highlight.js": "^10.1.2",
     "marked": "^1.1.1",
     "raw-body": "^2.4.1",
-    "rxjs": "^6.6.0",
+    "rxjs": "^6.6.2",
     "sharp": "^0.25.4"
   },
   "devDependencies": {
