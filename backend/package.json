@@ -31,7 +31,7 @@
     "marked": "^1.1.1",
     "raw-body": "^2.4.1",
     "rxjs": "^6.6.2",
-    "sharp": "^0.25.4"
+    "sharp": "^0.26.1"
   },
   "devDependencies": {
     "@types/node": "^14.0.27",
