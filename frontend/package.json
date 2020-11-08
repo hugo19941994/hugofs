@@ -42,7 +42,7 @@
     "highlight.js": "^10.3.1",
     "marked": "^1.2.3",
     "rxjs": "~6.6.3",
-    "tslib": "^2.0.1",
+    "tslib": "^2.0.3",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
