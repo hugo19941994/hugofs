@@ -34,7 +34,7 @@
     "sharp": "^0.26.2"
   },
   "devDependencies": {
-    "@types/node": "^14.14.2",
+    "@types/node": "^14.14.6",
     "cpy-cli": "^3.1.1",
     "pre-commit": "^1.2.2",
     "reflect-metadata": "^0.1.13",
