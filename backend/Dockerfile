@@ -1,12 +1,13 @@
 FROM node:15-alpine
 
-WORKDIR /app
-COPY package*.json /app/
-
 RUN apk --no-cache add python3 make build-base
+
+WORKDIR /app
+COPY *.json /app/
+
 RUN npm install
 
-COPY . /app
+COPY *.ts /app/
 RUN npm run compile
 
 CMD npm run start
