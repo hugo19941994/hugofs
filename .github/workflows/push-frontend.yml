@@ -20,14 +20,22 @@ jobs:
         token: ${{ secrets.TELEGRAM_TOKEN }}
         args: Attempting deployment of frontend ${{ github.event_name }}.
 
-    - name: Build and push Frontend image
-      uses: docker/build-push-action@v1
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: Login to Dockerhub
+      uses: docker/login-action@v1
       with:
         username: hugo19941994
         password: ${{ secrets.DOCKER_PASSWORD }}
-        repository: hugo19941994/hugofs-frontend
-        tags: latest
-        path: frontend
+
+    - name: Build and push Frontend image
+      uses: docker/build-push-action@v2
+      with:
+        context: ./frontend
+        file: ./frontend/Dockerfile
+        tags: hugo19941994/hugofs-frontend:latest
+        push: true
 
     - name: Install doctl
       uses: digitalocean/action-doctl@v2
