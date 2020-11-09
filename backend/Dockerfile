@@ -10,4 +10,6 @@ RUN npm install
 COPY *.ts /app/
 RUN npm run compile
 
+COPY posts posts
+
 CMD npm run start
