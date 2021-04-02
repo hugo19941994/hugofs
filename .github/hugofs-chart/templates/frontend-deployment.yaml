@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hugofs-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hugofs-frontend
+  template:
+    metadata:
+      labels:
+        app: hugofs-frontend
+    spec:
+      containers:
+        - name: hugofs-frontend
+          image: "hugo19941994/hugofs-frontend:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+          - containerPort: 4000
+            protocol: TCP

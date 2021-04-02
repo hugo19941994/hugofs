@@ -1,7 +1,7 @@
 # HugoFS website
 
-[![continuous-delivery](https://github.com/hugo19941994/hugofs/actions/workflows/cd.yml/badge.svg)](https://github.com/hugo19941994/hugofs/actions/workflows/cd.yml)
 [![continuous-integration](https://github.com/hugo19941994/hugofs/actions/workflows/ci.yml/badge.svg)](https://github.com/hugo19941994/hugofs/actions/workflows/ci.yml)
+[![continuous-delivery](https://github.com/hugo19941994/hugofs/actions/workflows/cd.yml/badge.svg)](https://github.com/hugo19941994/hugofs/actions/workflows/cd.yml)
 
 ## Run
 
