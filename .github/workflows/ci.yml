@@ -1,0 +1,50 @@
+name: Continuous Integration
+
+on: [pull_request]
+
+jobs:
+  test-backend:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [15.x]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: npm install, build, and test backend
+      run: |
+        npm --prefix backend ci
+        npm --prefix backend run lint
+      env:
+        CI: true
+
+  test-frontend:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [15.x]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: npm install, build, and test frontend
+      run: |
+        npm --prefix frontend ci
+        npm --prefix frontend run lint
+      env:
+        CI: true
