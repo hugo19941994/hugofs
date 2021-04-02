@@ -1,8 +1,7 @@
 # HugoFS website
 
-| ![Frontend CI](https://github.com/hugo19941994/hugofs/workflows/Frontend%20CI/badge.svg) | ![Frontend Deployment](https://github.com/hugo19941994/hugofs/workflows/Frontend%20Deployment/badge.svg) |
-| --- | --- |
-| ![Backend CI](https://github.com/hugo19941994/hugofs/workflows/Backend%20CI/badge.svg) | ![Backend Deployment](https://github.com/hugo19941994/hugofs/workflows/Backend%20Deployment/badge.svg) |
+[![continuous-delivery](https://github.com/hugo19941994/hugofs/actions/workflows/cd.yml/badge.svg)](https://github.com/hugo19941994/hugofs/actions/workflows/cd.yml)
+[![continuous-integration](https://github.com/hugo19941994/hugofs/actions/workflows/ci.yml/badge.svg)](https://github.com/hugo19941994/hugofs/actions/workflows/ci.yml)
 
 ## Run
 

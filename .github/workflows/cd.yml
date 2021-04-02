@@ -78,7 +78,7 @@ jobs:
       with:
         namespace: 'default'
         manifests: |
-            ./manifest.yaml
+            ./.github/manifest.yaml
         kubectl-version: 'latest'
 
     - name: Send Telegram message
