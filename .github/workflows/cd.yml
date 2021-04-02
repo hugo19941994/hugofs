@@ -28,7 +28,7 @@ jobs:
       with:
         context: ./frontend
         file: ./frontend/Dockerfile
-        tags: hugo19941994/hugofs-frontend:latest
+        tags: hugo19941994/hugofs-frontend:$(git rev-parse --short "$GITHUB_SHA")
         push: true
 
   build-backend:
@@ -53,7 +53,7 @@ jobs:
       with:
         context: ./backend
         file: ./backend/Dockerfile
-        tags: hugo19941994/hugofs-backend:latest
+        tags: hugo19941994/hugofs-backend:$(git rev-parse --short "$GITHUB_SHA")
         push: true
 
   deployment:
@@ -81,9 +81,12 @@ jobs:
             ./.github/manifest.yaml
         kubectl-version: 'latest'
 
+    - name: Deploy to k8s
+      run: helm install hugofs .github/hugofs-chart --set image.tag=$(git rev-parse --short "$GITHUB_SHA")
+
     - name: Send Telegram message
       uses: appleboy/telegram-action@master
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
-        args: Deployed new version of HugoFS
+        args: Deployed new version of HugoFS to https://hfs.dev

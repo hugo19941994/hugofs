@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hugofs-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hugofs-backend
+  template:
+    metadata:
+      labels:
+        app: hugofs-backend
+    spec:
+      containers:
+        - name: hugofs-backend
+          image: "hugo19941994/hugofs-backend:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+          - containerPort: 3060
+            protocol: TCP
