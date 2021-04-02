@@ -1,9 +1,99 @@
-name: Continuous Integration
+name: continuous-integration
 
-on: [pull_request]
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  schedule:
+    - cron: '0 8 * * 2'
 
 jobs:
+  codeql-analyze:
+    name: CodeQL analysis
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: ['javascript']
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v1
+      with:
+        languages: ${{ matrix.language }}
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v1
+
+  anchore-scan-backend:
+    name: Anchore scan backend image
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: Build Backend image
+      uses: docker/build-push-action@v2
+      with:
+        context: ./backend
+        file: ./backend/Dockerfile
+        tags: hugo19941994/hugofs-backend:latest
+        push: false
+        load: true
+
+    - name: Scan image
+      uses: anchore/scan-action@v2
+      with:
+        image: hugo19941994/hugofs-backend:latest
+        acs-report-enable: true
+
+    - name: upload Anchore scan SARIF report
+      uses: github/codeql-action/upload-sarif@v1
+      with:
+        sarif_file: results.sarif
+
+  anchore-scan-frontend:
+    name: Anchore scan frontend image
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: Build Frontend image
+      uses: docker/build-push-action@v2
+      with:
+        context: ./frontend
+        file: ./frontend/Dockerfile
+        tags: hugo19941994/hugofs-frontend:latest
+        push: false
+        load: true
+
+    - name: Scan image
+      uses: anchore/scan-action@v2
+      with:
+        image: hugo19941994/hugofs-frontend:latest
+        acs-report-enable: true
+
+    - name: upload Anchore scan SARIF report
+      uses: github/codeql-action/upload-sarif@v1
+      with:
+        sarif_file: results.sarif
+
   test-backend:
+    name: Build and lint backend
     runs-on: ubuntu-latest
 
     strategy:
@@ -27,6 +117,7 @@ jobs:
         CI: true
 
   test-frontend:
+    name: Build and lint frontend
     runs-on: ubuntu-latest
 
     strategy:

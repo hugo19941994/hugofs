@@ -1,4 +1,4 @@
-name: Continuous Delivery
+name: continuous-delivery
 
 on:
   push:
@@ -7,6 +7,7 @@ on:
 
 jobs:
   build-frontend:
+    name: Build frontend
     runs-on: ubuntu-latest
 
     steps:
@@ -31,6 +32,7 @@ jobs:
         push: true
 
   build-backend:
+    name: Build backend
     runs-on: ubuntu-latest
 
     steps:
@@ -55,6 +57,7 @@ jobs:
         push: true
 
   deployment:
+    name: Deploy to kubernetes cluster
     needs: [build-backend, build-frontend]
     runs-on: ubuntu-latest
 
