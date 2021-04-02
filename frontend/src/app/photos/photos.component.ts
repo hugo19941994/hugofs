@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import mapStyle from './map_style.json';
 
-declare var google: any;
+declare let google: any;
 
 @Component({
   selector: 'app-photos',
@@ -17,15 +17,8 @@ declare var google: any;
   templateUrl: './photos.component.html'
 })
 export class PhotosComponent implements AfterViewInit {
-  photos = [];
-
-  // Load maps after the photo div has finished rendering
   @ViewChildren('photo') photoDiv: QueryList<any>;
-  ngAfterViewInit(): void {
-    this.photoDiv.changes.subscribe(() => {
-      for (const collection of this.photos) { this.prepareMap(collection); }
-    });
-  }
+  photos = [];
 
   // TODO: Progressive loading
   constructor(private readonly httpClient: HttpClient, private readonly renderer: Renderer2) {
@@ -33,6 +26,13 @@ export class PhotosComponent implements AfterViewInit {
     this.httpClient
       .get<Array<any>>('/api/photos/')
       .subscribe(res => (this.photos = res));
+  }
+
+  // Load maps after the photo div has finished rendering
+  ngAfterViewInit(): void {
+    this.photoDiv.changes.subscribe(() => {
+      for (const collection of this.photos) { this.prepareMap(collection); }
+    });
   }
 
   // Create a map for each collection

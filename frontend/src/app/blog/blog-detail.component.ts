@@ -13,7 +13,7 @@ import { DisqusComponent } from './disqus.component';
   selector: 'app-blog-detail',
   styleUrls: ['./blog-detail.component.css'],
   templateUrl: './blog-detail.component.html',
-  // tslint:disable-next-line
+  // eslint-disable-next-line
   encapsulation: ViewEncapsulation.None // Used to center images
 })
 export class BlogDetailComponent {
