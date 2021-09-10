@@ -58,7 +58,7 @@
     "@types/express": "^4.17.8",
     "@types/node": "^14.14.6",
     "@typescript-eslint/eslint-plugin": "4.16.1",
-    "@typescript-eslint/parser": "4.16.1",
+    "@typescript-eslint/parser": "4.31.0",
     "codelyzer": "^6.0.0",
     "eslint": "^7.6.0",
     "eslint-plugin-import": "2.22.1",
