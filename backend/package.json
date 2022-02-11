@@ -31,7 +31,7 @@
     "marked": "^2.0.1",
     "raw-body": "^2.4.1",
     "rxjs": "^6.6.3",
-    "sharp": "^0.28.0",
+    "sharp": "^0.30.1",
     "typescript": "^4.0.5"
   },
   "devDependencies": {
