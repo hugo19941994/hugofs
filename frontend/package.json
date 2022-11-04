@@ -40,7 +40,7 @@
     "@types/googlemaps": "^3.40.1",
     "express": "^4.15.2",
     "highlight.js": "^10.3.1",
-    "marked": "^2.0.1",
+    "marked": "^4.2.1",
     "rxjs": "~6.6.7",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
