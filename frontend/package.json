@@ -38,7 +38,7 @@
     "@angular/router": "^11.2.8",
     "@nguniversal/express-engine": "^11.2.1",
     "@types/googlemaps": "^3.40.1",
-    "express": "^4.15.2",
+    "express": "^4.17.3",
     "highlight.js": "^10.3.1",
     "marked": "^2.0.1",
     "rxjs": "~6.6.7",
