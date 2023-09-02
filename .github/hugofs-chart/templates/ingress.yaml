@@ -8,10 +8,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - hfs.dev
+    - {{ .Values.host }}
     secretName: hugofs-tls
   rules:
-  - host: hfs.dev
+  - host: {{ .Values.host }}
     http:
       paths:
       - path: /
