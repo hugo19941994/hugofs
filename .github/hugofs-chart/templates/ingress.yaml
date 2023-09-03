@@ -8,10 +8,13 @@ metadata:
 spec:
   tls:
   - hosts:
-    - {{ .Values.host }}
+    {{- range .Values.hosts }}
+    - {{ . | quote }}
+    {{- end }}
     secretName: hugofs-tls
   rules:
-  - host: {{ .Values.host }}
+    {{- range .Values.hosts }}
+  - host: {{ . | quote }}
     http:
       paths:
       - path: /
@@ -28,4 +31,5 @@ spec:
             name: hugofs-backend
             port:
               number: 80
+    {{- end }}
 

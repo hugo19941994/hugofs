@@ -3,4 +3,6 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
 
-host: hugofs.com
+hosts:
+  - hugofs.com
+  - www.hugofs.com
